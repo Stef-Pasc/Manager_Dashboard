@@ -317,12 +317,12 @@
         // 3. Vai su Project Settings > General > Your apps > Web app
         // 4. Copia i valori di configurazione qui sotto
         var firebaseConfig = {
-            apiKey: "AIzaSyALZrDiJvR5PcfWLjVmXHDgNRC7osjIL4o",
-            authDomain: "manager-dashboard-b246e.firebaseapp.com",
-            projectId: "manager-dashboard-b246e",
-            storageBucket: "manager-dashboard-b246e.firebasestorage.app",
-            messagingSenderId: "512974338924",
-            appId: "1:512974338924:web:8fae4404189fcd9e5a1149",
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT_ID.appspot.com",
+            messagingSenderId: "YOUR_SENDER_ID",
+            appId: "YOUR_APP_ID"
         };
         
         // Inizializza Firebase
@@ -331,9 +331,14 @@
         var currentUser = null;
         var syncTimeout = null;
         var isFirebaseConfigured = false;
+        var isLocalFile = window.location.protocol === 'file:';
+        
+        if (isLocalFile) {
+            console.warn('⚠️ Firebase non funziona con file://. Usa un server locale.');
+        }
         
         try {
-            if (firebaseConfig.apiKey !== "YOUR_API_KEY") {
+            if (firebaseConfig.apiKey !== "YOUR_API_KEY" && !isLocalFile) {
                 firebase.initializeApp(firebaseConfig);
                 firebaseApp = firebase;
                 db = firebase.firestore();
@@ -360,6 +365,15 @@
             var userInfo = document.getElementById('user-info');
             var syncStatus = document.getElementById('sync-status');
             
+            if (isLocalFile) {
+                if(loginBtn) loginBtn.style.display = 'none';
+                if(syncStatus) {
+                    syncStatus.innerHTML = '<span style="color:var(--warning)">⚠️ Serve HTTP</span>';
+                    syncStatus.title = 'Apri con un server locale (es. Live Server, python -m http.server)';
+                }
+                return;
+            }
+            
             if (!isFirebaseConfigured) {
                 if(loginBtn) loginBtn.style.display = 'none';
                 if(syncStatus) syncStatus.textContent = 'Firebase non configurato';
@@ -385,6 +399,10 @@
         }
         
         function loginWithGoogle() {
+            if (isLocalFile) {
+                showToast('⚠️ Firebase richiede HTTP. Apri con un server locale (Live Server, python -m http.server 8000)', 'error');
+                return;
+            }
             if (!isFirebaseConfigured) {
                 showToast('Configura Firebase prima di accedere', 'error');
                 return;
@@ -394,7 +412,11 @@
                 showToast('Accesso effettuato!');
             }).catch(function(error) {
                 console.error('Errore login:', error);
-                showToast('Errore accesso: ' + error.message, 'error');
+                if (error.code === 'auth/operation-not-supported-in-this-environment') {
+                    showToast('⚠️ Apri con server locale (Live Server o python -m http.server)', 'error');
+                } else {
+                    showToast('Errore accesso: ' + error.message, 'error');
+                }
             });
         }
         
