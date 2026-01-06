@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manager Dashboard v7</title>
+    <title>Manager Dashboard v7 Firebase - Firebase</title>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root{--bg-primary:#f8fafc;--bg-secondary:#fff;--bg-tertiary:#f1f5f9;--bg-elevated:#e2e8f0;--text-primary:#1e293b;--text-secondary:#64748b;--text-muted:#94a3b8;--accent-people:#f97316;--accent-projects:#3b82f6;--accent-operations:#10b981;--accent-strategy:#8b5cf6;--accent-habits:#14b8a6;--accent-lcp:#ec4899;--accent-topics:#6366f1;--accent-journal:#f59e0b;--border:#e2e8f0;--border-light:#cbd5e1;--success:#10b981;--warning:#f59e0b;--danger:#ef4444;--radius-sm:8px;--radius-md:12px;--radius-lg:16px;--shadow-sm:0 1px 2px rgba(0,0,0,.05);--shadow-md:0 4px 6px -1px rgba(0,0,0,.07),0 2px 4px -1px rgba(0,0,0,.04);--shadow-lg:0 10px 15px -3px rgba(0,0,0,.08),0 4px 6px -2px rgba(0,0,0,.03)}
@@ -104,6 +104,10 @@
             .lsw-week-grid{min-width:600px}
         }
     </style>
+<!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
 </head>
 <body>
     <button class="mobile-menu-btn" onclick="toggleMobileSidebar()">☰</button>
@@ -111,7 +115,7 @@
     <div class="app">
         <aside class="sidebar" id="sidebar">
             <div class="logo"><div class="logo-icon">📊</div>Manager Hub</div>
-            <div class="sidebar-subtitle">Dashboard v7</div>
+            <div class="sidebar-subtitle">Dashboard v7 Firebase</div>
             <nav class="nav-section">
                 <div class="nav-label">Aree</div>
                 <div class="nav-item active" data-section="operations" onclick="switchSection('operations')"><span class="nav-icon">⚡</span>Tasks</div>
@@ -124,12 +128,20 @@
                 <div class="nav-item" data-section="strategy" onclick="switchSection('strategy')"><span class="nav-icon">📊</span>Strategy</div>
             </nav>
             <div class="sidebar-footer">
-                <div class="data-actions">
-                    <button class="btn-icon-only" id="save-btn" onclick="saveToFile()" title="Salva">💾</button>
-                    <button class="btn-icon-only" onclick="document.getElementById('loadFile').click()" title="Carica">📂</button>
-                    <button class="btn-icon-only" onclick="document.getElementById('mergeFiles').click()" title="Unisci due file JSON">🔗</button>
-                    <input type="file" id="loadFile" class="file-input" accept=".json" onchange="loadDataFromFile(event)">
-                    <input type="file" id="mergeFiles" class="file-input" accept=".json" multiple onchange="mergeDataFiles(event)">
+                <div class="data-actions" id="auth-section">
+                    <div id="user-info" style="display:none;font-size:.65rem;color:var(--text-secondary);margin-bottom:8px;text-align:center"></div>
+                    <button class="btn-icon-only" id="login-btn" onclick="loginWithGoogle()" title="Accedi con Google">🔐</button>
+                    <button class="btn-icon-only" id="logout-btn" onclick="logoutFirebase()" title="Esci" style="display:none">🚪</button>
+                    <button class="btn-icon-only" id="sync-btn" onclick="syncNow()" title="Sincronizza ora" style="display:none">🔄</button>
+                    <span id="sync-status" style="font-size:.55rem;color:var(--text-muted);margin-left:4px"></span>
+                </div>
+                <div style="border-top:1px solid var(--border);margin-top:8px;padding-top:8px">
+                    <div style="font-size:.55rem;color:var(--text-muted);margin-bottom:4px">Backup locale:</div>
+                    <div class="data-actions">
+                        <button class="btn-icon-only" onclick="saveToFile()" title="Esporta JSON">💾</button>
+                        <button class="btn-icon-only" onclick="document.getElementById('loadFile').click()" title="Importa JSON">📂</button>
+                        <input type="file" id="loadFile" class="file-input" accept=".json" onchange="loadDataFromFile(event)">
+                    </div>
                 </div>
             </div>
         </aside>
@@ -298,6 +310,179 @@
     <div id="person-feedback-modal" class="modal"><div class="modal-content"><div class="modal-header"><h3 class="modal-title">Feedback/Nota</h3><button class="panel-close" onclick="closeModal('person-feedback-modal')">×</button></div><div class="modal-body"><input type="hidden" id="pfeedback-id"><input type="hidden" id="pfeedback-person-id"><div class="form-group"><label class="form-label">Data</label><input type="date" id="pfeedback-date" class="form-input"></div><div class="form-group"><label class="form-label">Nota</label><textarea id="pfeedback-text" class="form-textarea"></textarea></div></div><div class="modal-footer"><button class="btn btn-secondary" onclick="closeModal('person-feedback-modal')">Annulla</button><button class="btn btn-primary" onclick="savePersonFeedback()">Salva</button></div></div></div>
 
     <script>
+        // ============ FIREBASE CONFIGURATION ============
+        // ISTRUZIONI: Sostituisci questi valori con quelli del tuo progetto Firebase
+        // 1. Vai su https://console.firebase.google.com/
+        // 2. Crea un nuovo progetto (o usa uno esistente)
+        // 3. Vai su Project Settings > General > Your apps > Web app
+        // 4. Copia i valori di configurazione qui sotto
+        var firebaseConfig = {
+            apiKey: "AIzaSyALZrDiJvR5PcfWLjVmXHDgNRC7osjIL4o",
+            authDomain: "manager-dashboard-b246e.firebaseapp.com",
+            projectId: "manager-dashboard-b246e",
+            storageBucket: "manager-dashboard-b246e.firebasestorage.app",
+            messagingSenderId: "512974338924",
+            appId: "1:512974338924:web:8fae4404189fcd9e5a1149",
+        };
+        
+        // Inizializza Firebase
+        var firebaseApp = null;
+        var db = null;
+        var currentUser = null;
+        var syncTimeout = null;
+        var isFirebaseConfigured = false;
+        
+        try {
+            if (firebaseConfig.apiKey !== "YOUR_API_KEY") {
+                firebase.initializeApp(firebaseConfig);
+                firebaseApp = firebase;
+                db = firebase.firestore();
+                isFirebaseConfigured = true;
+                
+                // Ascolta i cambiamenti di autenticazione
+                firebase.auth().onAuthStateChanged(function(user) {
+                    currentUser = user;
+                    updateAuthUI();
+                    if (user) {
+                        loadFromFirestore();
+                        setupRealtimeSync();
+                    }
+                });
+            }
+        } catch(e) {
+            console.log('Firebase non configurato:', e);
+        }
+        
+        function updateAuthUI() {
+            var loginBtn = document.getElementById('login-btn');
+            var logoutBtn = document.getElementById('logout-btn');
+            var syncBtn = document.getElementById('sync-btn');
+            var userInfo = document.getElementById('user-info');
+            var syncStatus = document.getElementById('sync-status');
+            
+            if (!isFirebaseConfigured) {
+                if(loginBtn) loginBtn.style.display = 'none';
+                if(syncStatus) syncStatus.textContent = 'Firebase non configurato';
+                return;
+            }
+            
+            if (currentUser) {
+                if(loginBtn) loginBtn.style.display = 'none';
+                if(logoutBtn) logoutBtn.style.display = 'inline-flex';
+                if(syncBtn) syncBtn.style.display = 'inline-flex';
+                if(userInfo) {
+                    userInfo.style.display = 'block';
+                    userInfo.textContent = currentUser.email || currentUser.displayName || 'Utente';
+                }
+                if(syncStatus) syncStatus.textContent = '✓ Connesso';
+            } else {
+                if(loginBtn) loginBtn.style.display = 'inline-flex';
+                if(logoutBtn) logoutBtn.style.display = 'none';
+                if(syncBtn) syncBtn.style.display = 'none';
+                if(userInfo) userInfo.style.display = 'none';
+                if(syncStatus) syncStatus.textContent = 'Non connesso';
+            }
+        }
+        
+        function loginWithGoogle() {
+            if (!isFirebaseConfigured) {
+                showToast('Configura Firebase prima di accedere', 'error');
+                return;
+            }
+            var provider = new firebase.auth.GoogleAuthProvider();
+            firebase.auth().signInWithPopup(provider).then(function(result) {
+                showToast('Accesso effettuato!');
+            }).catch(function(error) {
+                console.error('Errore login:', error);
+                showToast('Errore accesso: ' + error.message, 'error');
+            });
+        }
+        
+        function logoutFirebase() {
+            firebase.auth().signOut().then(function() {
+                showToast('Disconnesso');
+            });
+        }
+        
+        function saveToFirestore() {
+            if (!currentUser || !db) return Promise.resolve();
+            
+            document.getElementById('sync-status').textContent = '⏳ Salvataggio...';
+            
+            return db.collection('users').doc(currentUser.uid).set({
+                data: JSON.stringify(data),
+                updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+            }).then(function() {
+                document.getElementById('sync-status').textContent = '✓ Salvato ' + new Date().toLocaleTimeString('it-IT', {hour:'2-digit', minute:'2-digit'});
+            }).catch(function(error) {
+                console.error('Errore salvataggio:', error);
+                document.getElementById('sync-status').textContent = '❌ Errore';
+                showToast('Errore salvataggio cloud', 'error');
+            });
+        }
+        
+        function loadFromFirestore() {
+            if (!currentUser || !db) return;
+            
+            document.getElementById('sync-status').textContent = '⏳ Caricamento...';
+            
+            db.collection('users').doc(currentUser.uid).get().then(function(doc) {
+                if (doc.exists && doc.data().data) {
+                    var loaded = JSON.parse(doc.data().data);
+                    Object.keys(loaded).forEach(function(k) {
+                        if (data.hasOwnProperty(k)) data[k] = loaded[k];
+                    });
+                    migrateSpecialDays();
+                    renderAll();
+                    document.getElementById('sync-status').textContent = '✓ Caricato';
+                    showToast('Dati caricati dal cloud');
+                } else {
+                    document.getElementById('sync-status').textContent = '✓ Nuovo utente';
+                }
+            }).catch(function(error) {
+                console.error('Errore caricamento:', error);
+                document.getElementById('sync-status').textContent = '❌ Errore';
+            });
+        }
+        
+        function setupRealtimeSync() {
+            if (!currentUser || !db) return;
+            
+            db.collection('users').doc(currentUser.uid).onSnapshot(function(doc) {
+                // Solo se il documento è stato modificato da un altro dispositivo
+                if (doc.metadata.hasPendingWrites) return;
+                
+                if (doc.exists && doc.data().data) {
+                    var loaded = JSON.parse(doc.data().data);
+                    Object.keys(loaded).forEach(function(k) {
+                        if (data.hasOwnProperty(k)) data[k] = loaded[k];
+                    });
+                    migrateSpecialDays();
+                    renderAll();
+                    document.getElementById('sync-status').textContent = '✓ Sincronizzato';
+                }
+            });
+        }
+        
+        function syncNow() {
+            saveToFirestore();
+        }
+        
+        // Override autoSave per salvare anche su Firestore
+        function autoSaveFirestore() {
+            // Salva in localStorage come backup
+            try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch(e) {}
+            
+            // Salva su Firestore con debounce
+            if (currentUser && db) {
+                if (syncTimeout) clearTimeout(syncTimeout);
+                syncTimeout = setTimeout(function() {
+                    saveToFirestore();
+                }, 2000); // Aspetta 2 secondi prima di salvare
+            }
+        }
+        // ============ FINE FIREBASE ============
+
         var STORAGE_KEY='manager-dashboard-v7',fileHandle=null,data={people:[],projects:[],tasks:[],teamObjectives:[],milestones:[],thoughts:[],leadershipNotes:[],progressList:[],habits:[],habitCompletions:{},habitComments:{},habitOverrides:{},dayComments:{},weeklyObjectives:{},resourceAssessments:[],cirs:[],topics:[],specialDayRanges:[],journalEntries:{}},currentPersonId=null,currentDay=new Date(),zoomWeeks=1,timelineZoom=1,tempProjectSteps=[],tempRAProjects=[],tempCIRPOs=[],tempObjectiveSubgoals=[],draggedProjectId=null,highlightedDateKey=null,currentPeopleFilter='report',showExtraYears=false,lcpSearchFilter='',currentTopicId=null,journalViewDate=new Date(),journalSelectedDate=new Date(),currentAttachTarget=null;
         var PEOPLE_COLORS=['#f97316','#3b82f6','#10b981','#8b5cf6','#ec4899','#14b8a6','#f59e0b','#ef4444','#6366f1','#84cc16'];
         var PROJECT_COLORS=['#3b82f6','#8b5cf6','#10b981','#f97316','#ef4444','#ec4899','#14b8a6','#f59e0b','#6366f1','#84cc16'];
@@ -313,7 +498,7 @@
         function formatCurrency(n){return n?'€'+parseFloat(n).toLocaleString('it-IT',{minimumFractionDigits:2,maximumFractionDigits:2}):'€0,00'}
         function showToast(msg,type){type=type||'success';var t=document.getElementById('toast');t.textContent=msg;t.className='toast visible '+type;setTimeout(function(){t.classList.remove('visible')},2500)}
         function getInitials(n){return n.split(' ').map(function(x){return x[0]}).join('').toUpperCase().slice(0,2)}
-        function autoSave(){localStorage.setItem(STORAGE_KEY,JSON.stringify(data));if(fileHandle)saveToFileHandle()}
+        function autoSave(){localStorage.setItem(STORAGE_KEY,JSON.stringify(data));if(fileHandle)saveToFileHandle();autoSaveFirestore()}
         function migrateSpecialDays(){if(data.specialDays&&Object.keys(data.specialDays).length>0&&(!data.specialDayRanges||!data.specialDayRanges.length)){data.specialDayRanges=[];Object.keys(data.specialDays).forEach(function(dk){data.specialDayRanges.push({id:generateId(),startDate:dk,endDate:dk,reason:data.specialDays[dk]})});delete data.specialDays}}
         function loadFromStorage(){var saved=localStorage.getItem(STORAGE_KEY);if(saved)try{var parsed=JSON.parse(saved);Object.keys(parsed).forEach(function(k){if(data.hasOwnProperty(k))data[k]=parsed[k]});migrateSpecialDays()}catch(e){}}
         async function saveToFile(){if('showSaveFilePicker'in window)try{fileHandle=await window.showSaveFilePicker({suggestedName:'manager-dashboard.json',types:[{description:'JSON',accept:{'application/json':['.json']}}]});await saveToFileHandle();document.getElementById('save-btn').classList.add('linked');showToast('File collegato')}catch(e){if(e.name!=='AbortError')downloadJson()}else downloadJson()}
@@ -514,6 +699,7 @@ function adjustColor(hex,amount){var num=parseInt(hex.slice(1),16);var r=Math.mi
         function renderAll(){renderLSWStats();renderWeekTracker();renderHabitsBlocks();renderPeople();renderProjects();renderLCP();renderTopics();renderJournal();renderTasks();renderStrategy()}
         loadFromStorage();
         renderAll();
+        updateAuthUI();
         document.addEventListener('mouseup',function(){var textareas=document.querySelectorAll('.day-comment-input');if(textareas.length>1){var maxHeight=0;textareas.forEach(function(ta){if(ta.offsetHeight>maxHeight)maxHeight=ta.offsetHeight});textareas.forEach(function(ta){if(ta.offsetHeight<maxHeight){ta.style.height=maxHeight+'px';ta.style.minHeight=maxHeight+'px'}})}});
     </script>
 </body>
