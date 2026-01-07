@@ -115,6 +115,22 @@
     <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
 </head>
 <body>
+    <div id="auth-wall" style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;background:var(--bg-primary)">
+        <div style="text-align:center;padding:40px;max-width:320px">
+            <div style="font-size:3rem;margin-bottom:20px">📊</div>
+            <h1 style="font-size:1.5rem;color:var(--text-primary);margin-bottom:10px">Manager Hub</h1>
+            <p style="color:var(--text-muted);margin-bottom:30px;font-size:.85rem">Accedi per sincronizzare i dati</p>
+            <button onclick="loginWithGoogle()" style="padding:12px 24px;font-size:.9rem;background:linear-gradient(135deg,#4285f4,#34a853);color:#fff;border:none;border-radius:8px;cursor:pointer;display:flex;align-items:center;gap:10px;margin:0 auto;width:100%;justify-content:center">
+                <span style="font-size:1.2rem">🔐</span> Accedi con Google
+            </button>
+            <p id="auth-wall-error" style="color:var(--danger);margin-top:20px;font-size:.75rem;display:none"></p>
+            <div style="margin-top:30px;padding-top:20px;border-top:1px solid var(--border)">
+                <button onclick="skipAuth()" style="padding:10px 20px;font-size:.8rem;background:transparent;color:var(--text-muted);border:1px solid var(--border);border-radius:6px;cursor:pointer;width:100%">Continua offline</button>
+                <p style="color:var(--text-muted);margin-top:10px;font-size:.65rem">I dati saranno solo su questo dispositivo</p>
+            </div>
+        </div>
+    </div>
+    <div id="app-content" style="display:none">
     <header class="mobile-header">
         <div class="mobile-header-content">
             <div class="mobile-header-left">
@@ -290,6 +306,7 @@
             <div class="mobile-nav-item" data-section="journal" onclick="switchSection('journal');updateMobileNav(this)"><span>📓</span>Journal</div>
         </div>
     </nav>
+    </div><!-- end app-content -->
 
     <!-- Modals -->
     <div id="person-modal" class="modal"><div class="modal-content"><div class="modal-header"><h3 class="modal-title" id="person-modal-title">Nuova persona</h3><button class="panel-close" onclick="closeModal('person-modal')">×</button></div><div class="modal-body"><input type="hidden" id="person-id"><div class="form-group"><label class="form-label">Nome</label><input type="text" id="person-name" class="form-input"></div><div class="form-group"><label class="form-label">Ruolo</label><input type="text" id="person-role" class="form-input"></div><div class="form-group"><label class="form-label">Tipo</label><select id="person-type" class="form-select"><option value="report">Direct Report</option><option value="peer">Peer</option><option value="other">Other</option></select></div></div><div class="modal-footer"><button class="btn btn-secondary" onclick="closeModal('person-modal')">Annulla</button><button class="btn btn-primary" onclick="savePerson()">Salva</button></div></div></div>
@@ -369,6 +386,7 @@
                 firebase.auth().onAuthStateChanged(function(user) {
                     currentUser = user;
                     updateAuthUI();
+                    showHideAuthWall(!user);
                     if (user) {
                         loadFromFirestore();
                         setupRealtimeSync();
@@ -377,6 +395,20 @@
             }
         } catch(e) {
             console.log('Firebase non configurato:', e);
+            // Se Firebase non è configurato, mostra comunque l'app (modalità offline)
+            showHideAuthWall(false);
+        }
+        
+        function showHideAuthWall(showWall) {
+            var authWall = document.getElementById('auth-wall');
+            var appContent = document.getElementById('app-content');
+            if (authWall) authWall.style.display = showWall ? 'flex' : 'none';
+            if (appContent) appContent.style.display = showWall ? 'none' : 'block';
+        }
+        
+        function skipAuth() {
+            showHideAuthWall(false);
+            showToast('Modalità offline - dati salvati localmente');
         }
         
         function updateAuthUI() {
@@ -429,11 +461,19 @@
         
         function loginWithGoogle() {
             if (isLocalFile) {
-                showToast('⚠️ Firebase richiede HTTP. Apri con un server locale (Live Server, python -m http.server 8000)', 'error');
+                var errEl = document.getElementById('auth-wall-error');
+                if (errEl) {
+                    errEl.style.display = 'block';
+                    errEl.textContent = '⚠️ Firebase richiede HTTP. Apri con un server locale (Live Server, python -m http.server 8000)';
+                }
                 return;
             }
             if (!isFirebaseConfigured) {
-                showToast('Configura Firebase prima di accedere', 'error');
+                var errEl = document.getElementById('auth-wall-error');
+                if (errEl) {
+                    errEl.style.display = 'block';
+                    errEl.textContent = 'Firebase non configurato. Inserisci le credenziali nel file.';
+                }
                 return;
             }
             var provider = new firebase.auth.GoogleAuthProvider();
@@ -441,10 +481,14 @@
                 showToast('Accesso effettuato!');
             }).catch(function(error) {
                 console.error('Errore login:', error);
-                if (error.code === 'auth/operation-not-supported-in-this-environment') {
-                    showToast('⚠️ Apri con server locale (Live Server o python -m http.server)', 'error');
-                } else {
-                    showToast('Errore accesso: ' + error.message, 'error');
+                var errEl = document.getElementById('auth-wall-error');
+                if (errEl) {
+                    errEl.style.display = 'block';
+                    if (error.code === 'auth/operation-not-supported-in-this-environment') {
+                        errEl.textContent = '⚠️ Apri con server locale (Live Server o python -m http.server)';
+                    } else {
+                        errEl.textContent = 'Errore: ' + error.message;
+                    }
                 }
             });
         }
