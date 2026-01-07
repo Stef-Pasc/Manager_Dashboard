@@ -543,10 +543,18 @@
             });
         }
         
+        var realtimeSyncUnsubscribe = null;
+        
         function setupRealtimeSync() {
             if (!currentUser || !db) return;
             
-            db.collection('users').doc(currentUser.uid).collection('data').doc(currentDataMode).onSnapshot(function(doc) {
+            // Annulla il listener precedente se esiste
+            if (realtimeSyncUnsubscribe) {
+                realtimeSyncUnsubscribe();
+                realtimeSyncUnsubscribe = null;
+            }
+            
+            realtimeSyncUnsubscribe = db.collection('users').doc(currentUser.uid).collection('data').doc(currentDataMode).onSnapshot(function(doc) {
                 // Solo se il documento è stato modificato da un altro dispositivo
                 if (doc.metadata.hasPendingWrites) return;
                 
@@ -589,29 +597,88 @@
             if (mode === currentDataMode) return;
             
             // Salva dati correnti prima di switchare
-            autoSave();
+            if (currentUser && db) {
+                saveToFirestore();
+            }
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
             
             // Cambia modalità
             currentDataMode = mode;
             localStorage.setItem('dataMode', mode);
             STORAGE_KEY = 'manager-dashboard-v7-' + mode;
             
-            // Reset data
-            data = {people:[],projects:[],tasks:[],teamObjectives:[],milestones:[],thoughts:[],leadershipNotes:[],progressList:[],habits:[],habitCompletions:{},habitComments:{},habitOverrides:{},dayComments:{},weeklyObjectives:{},resourceAssessments:[],cirs:[],topics:[],specialDayRanges:[],journalEntries:{}};
+            // Reset data COMPLETO
+            data = {
+                people:[],
+                projects:[],
+                tasks:[],
+                teamObjectives:[],
+                milestones:[],
+                thoughts:[],
+                leadershipNotes:[],
+                progressList:[],
+                habits:[],
+                habitCompletions:{},
+                habitComments:{},
+                habitOverrides:{},
+                dayComments:{},
+                weeklyObjectives:{},
+                resourceAssessments:[],
+                cirs:[],
+                topics:[],
+                specialDayRanges:[],
+                journalEntries:{}
+            };
             
             // Aggiorna UI switch
             document.getElementById('mode-pro-btn').classList.toggle('active', mode === 'pro');
             document.getElementById('mode-personal-btn').classList.toggle('active', mode === 'personal');
             
-            // Carica dati nuova modalità
-            loadFromStorage();
+            // Carica dati nuova modalità da localStorage
+            var stored = localStorage.getItem(STORAGE_KEY);
+            if (stored) {
+                try {
+                    var loaded = JSON.parse(stored);
+                    Object.keys(loaded).forEach(function(k) {
+                        if (data.hasOwnProperty(k)) data[k] = loaded[k];
+                    });
+                } catch(e) {
+                    console.error('Errore parsing localStorage:', e);
+                }
+            }
+            
+            // Carica dati da Firebase (sovrascrive localStorage se presenti)
             if (currentUser && db) {
-                loadFromFirestore();
+                var statusEl = document.getElementById('sync-status');
+                if (statusEl) statusEl.textContent = '⏳ Caricamento ' + mode + '...';
+                
+                db.collection('users').doc(currentUser.uid).collection('data').doc(mode).get().then(function(doc) {
+                    if (doc.exists && doc.data().data) {
+                        var loaded = JSON.parse(doc.data().data);
+                        // Reset di nuovo prima di caricare da Firebase
+                        data = {people:[],projects:[],tasks:[],teamObjectives:[],milestones:[],thoughts:[],leadershipNotes:[],progressList:[],habits:[],habitCompletions:{},habitComments:{},habitOverrides:{},dayComments:{},weeklyObjectives:{},resourceAssessments:[],cirs:[],topics:[],specialDayRanges:[],journalEntries:{}};
+                        Object.keys(loaded).forEach(function(k) {
+                            if (data.hasOwnProperty(k)) data[k] = loaded[k];
+                        });
+                        migrateSpecialDays();
+                        if (statusEl) statusEl.textContent = '✓ ' + mode;
+                    } else {
+                        if (statusEl) statusEl.textContent = '✓ ' + mode + ' (nuovo)';
+                    }
+                    renderAll();
+                    // Riavvia realtime sync per il nuovo mode
+                    setupRealtimeSync();
+                }).catch(function(error) {
+                    console.error('Errore caricamento ' + mode + ':', error);
+                    if (statusEl) statusEl.textContent = '❌ Errore';
+                    renderAll();
+                });
             } else {
                 renderAll();
             }
             
             showToast(mode === 'pro' ? '💼 Modalità Pro' : '🏠 Modalità Personal');
+            closeMobileSidebar();
         }
         
         function updateModeUI() {
