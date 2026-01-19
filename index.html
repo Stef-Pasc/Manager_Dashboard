@@ -17,6 +17,7 @@
         .toggle-switch{position:relative;display:inline-block;width:36px;height:20px}.toggle-switch input{opacity:0;width:0;height:0}.toggle-slider{position:absolute;cursor:pointer;top:0;left:0;right:0;bottom:0;background:var(--bg-tertiary);border:1px solid var(--border);transition:.3s;border-radius:20px}.toggle-slider:before{position:absolute;content:"";height:14px;width:14px;left:2px;bottom:2px;background:#fff;transition:.3s;border-radius:50%}.toggle-switch input:checked+.toggle-slider{background:var(--accent-habits);border-color:var(--accent-habits)}.toggle-switch input:checked+.toggle-slider:before{transform:translateX(16px)}
         .main{flex:1;margin-left:200px;padding:22px 28px;max-width:1400px}.page{display:none}.page.active{display:block;animation:fadeIn .3s}@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
         .page-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.page-title{font-size:1.3rem;font-weight:700}.page-title[data-accent="habits"]{color:var(--accent-habits)}.page-title[data-accent="people"]{color:var(--accent-people)}.page-title[data-accent="projects"]{color:var(--accent-projects)}.page-title[data-accent="lcp"]{color:var(--accent-lcp)}.page-title[data-accent="operations"]{color:var(--accent-operations)}.page-title[data-accent="strategy"]{color:var(--accent-strategy)}.page-title[data-accent="topics"]{color:var(--accent-topics)}.page-title[data-accent="books"]{color:#a855f7}.page-title[data-accent="journal"]{color:var(--accent-journal)}
+        .agenda-table-card{background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-lg);padding:14px;margin-bottom:18px}.agenda-table-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.agenda-table-title{font-size:.85rem;font-weight:600;display:flex;align-items:center;gap:6px}.agenda-table-title input{border:none;background:transparent;font-size:.85rem;font-weight:600;padding:2px 4px;border-radius:4px;width:200px}.agenda-table-title input:hover,.agenda-table-title input:focus{background:var(--bg-tertiary);outline:none}.agenda-table-actions{display:flex;gap:4px}.agenda-table{width:100%;border-collapse:collapse;font-size:.7rem}.agenda-table th,.agenda-table td{border:1px solid var(--border);padding:6px 8px;text-align:left;min-width:80px}.agenda-table th{background:var(--bg-tertiary);font-weight:600;color:var(--text-secondary)}.agenda-table td{background:var(--bg-secondary)}.agenda-table th input,.agenda-table td input{width:100%;border:none;background:transparent;padding:2px;font-size:.7rem;outline:none}.agenda-table th input{font-weight:600;color:var(--text-secondary)}.agenda-table th input:focus,.agenda-table td input:focus{background:var(--bg-tertiary);border-radius:2px}.agenda-table-resize{display:flex;gap:8px;margin-top:10px;align-items:center;font-size:.6rem;color:var(--text-muted)}.agenda-table-resize button{padding:2px 6px;font-size:.6rem}
         .btn{display:inline-flex;align-items:center;justify-content:center;gap:5px;padding:6px 11px;border-radius:var(--radius-md);font-size:.7rem;font-weight:600;cursor:pointer;transition:all .2s;border:none;font-family:inherit}.btn-primary{background:linear-gradient(135deg,var(--accent-habits),#0d9488);color:#fff}.btn-primary:hover{transform:translateY(-1px)}.btn-secondary{background:var(--bg-secondary);color:var(--text-primary);border:1px solid var(--border)}.btn-secondary:hover{background:var(--bg-tertiary)}.btn-danger{background:var(--danger);color:#fff}.btn-warning{background:var(--warning);color:#fff}.btn-sm{padding:4px 8px;font-size:.65rem}.btn-xs{padding:3px 6px;font-size:.6rem}.btn-add{width:26px;height:26px;padding:0;border-radius:50%;font-size:1rem}
         .lsw-chart-container{background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-lg);padding:14px 18px;margin-bottom:14px}.lsw-chart-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.lsw-chart-title{font-size:.65rem;font-weight:600;color:var(--text-secondary);text-transform:uppercase;letter-spacing:.5px}.lsw-chart-stats{display:flex;gap:14px}.lsw-chart-stat{text-align:right}.lsw-chart-stat-value{font-family:'JetBrains Mono',monospace;font-size:1rem;font-weight:700}.lsw-chart-stat-value.green{color:var(--success)}.lsw-chart-stat-value.yellow{color:var(--warning)}.lsw-chart-stat-value.red{color:var(--danger)}.lsw-chart-stat-label{font-size:.5rem;color:var(--text-muted);text-transform:uppercase}.lsw-chart-stat-trend{font-size:.55rem;margin-top:1px}.lsw-chart-stat-trend.up{color:var(--success)}.lsw-chart-stat-trend.down{color:var(--danger)}
         .lsw-chart-body{position:relative;height:90px;margin-top:10px;padding-top:10px;overflow:visible}.lsw-chart-area{position:absolute;top:10px;left:0;right:0;bottom:0;overflow:hidden}.lsw-chart-grid{position:absolute;top:10px;left:30px;right:0;height:60px;display:flex;flex-direction:column;justify-content:space-between;z-index:1}.lsw-chart-grid-line{border-top:1px dashed var(--border);position:relative}.lsw-chart-grid-line::before{content:attr(data-value);position:absolute;left:-28px;top:-6px;font-size:.5rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace}.lsw-chart-line{position:absolute;top:10px;left:30px;width:calc(100% - 30px);height:60px;z-index:2}.lsw-chart-points{position:absolute;top:10px;left:30px;width:calc(100% - 30px);height:60px;z-index:3}.lsw-chart-point{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center}.lsw-chart-point-value{font-family:'JetBrains Mono',monospace;font-size:.55rem;font-weight:500;color:var(--point-color);position:absolute;top:-16px;white-space:nowrap}.lsw-chart-point.current .lsw-chart-point-value{font-weight:700;font-size:.6rem}.lsw-chart-point-dot{width:8px;height:8px;border-radius:50%;background:var(--point-color);border:2px solid var(--bg-secondary);box-shadow:0 1px 3px rgba(0,0,0,0.2)}.lsw-chart-point.current .lsw-chart-point-dot{width:10px;height:10px}.lsw-chart-labels{position:absolute;bottom:0;left:30px;right:0;height:20px;display:flex;z-index:1}.lsw-chart-label{font-size:.5rem;color:var(--text-muted);text-align:center;flex:1}.lsw-chart-label.current{color:var(--text-primary);font-weight:700}.lsw-chart-current-bg{position:absolute;top:10px;height:60px;background:rgba(20,184,166,0.1);border-radius:4px;border:1px solid rgba(20,184,166,0.2);z-index:0}
@@ -207,6 +208,7 @@
                 <div class="nav-item" data-section="topics" onclick="switchSection('topics')"><span class="nav-icon">🎯</span>Topics</div>
                 <div class="nav-item" data-section="books" onclick="switchSection('books')"><span class="nav-icon">📚</span>Libri</div>
                 <div class="nav-item" data-section="journal" onclick="switchSection('journal')"><span class="nav-icon">📔</span>Journal</div>
+                <div class="nav-item" data-section="agenda" onclick="switchSection('agenda')"><span class="nav-icon">📅</span>Agenda</div>
                 <div class="nav-item" data-section="strategy" onclick="switchSection('strategy')"><span class="nav-icon">📊</span>Strategy</div>
             </nav>
             <div class="sidebar-footer">
@@ -393,6 +395,10 @@
                 <div id="strategy-thoughts" class="strategy-content" style="display:none"><div class="section-header"><div class="section-title">Pensieri</div><button class="btn btn-sm btn-add btn-primary" onclick="openThoughtModal()">+</button></div><div id="thoughts-list"></div></div>
                 <div id="strategy-notes" class="strategy-content" style="display:none"><div class="section-header"><div class="section-title">Note Leadership</div><button class="btn btn-sm btn-add btn-primary" onclick="openLeadershipNoteModal()">+</button></div><div id="leadership-notes-list"></div></div>
             </div>
+            <div id="page-agenda" class="page">
+                <div class="page-header"><h1 class="page-title" data-accent="habits">Agenda</h1><button class="btn btn-primary btn-add" onclick="openAgendaTableModal()">+</button></div>
+                <div id="agenda-tables-container"></div>
+            </div>
         </main>
     </div>
     <div class="panel-overlay" onclick="closePanel()"></div>
@@ -454,6 +460,8 @@
     <div id="person-step-modal" class="modal"><div class="modal-content"><div class="modal-header"><h3 class="modal-title">Next Step</h3><button class="panel-close" onclick="closeModal('person-step-modal')">×</button></div><div class="modal-body"><input type="hidden" id="pstep-id"><input type="hidden" id="pstep-person-id"><div class="form-group"><label class="form-label">Step</label><textarea id="pstep-text" class="form-textarea"></textarea></div></div><div class="modal-footer"><button class="btn btn-secondary" onclick="closeModal('person-step-modal')">Annulla</button><button class="btn btn-primary" onclick="savePersonStep()">Salva</button></div></div></div>
 
     <div id="person-feedback-modal" class="modal"><div class="modal-content"><div class="modal-header"><h3 class="modal-title">Feedback/Nota</h3><button class="panel-close" onclick="closeModal('person-feedback-modal')">×</button></div><div class="modal-body"><input type="hidden" id="pfeedback-id"><input type="hidden" id="pfeedback-person-id"><div class="form-group"><label class="form-label">Data</label><input type="date" id="pfeedback-date" class="form-input"></div><div class="form-group"><label class="form-label">Nota</label><textarea id="pfeedback-text" class="form-textarea"></textarea></div></div><div class="modal-footer"><button class="btn btn-secondary" onclick="closeModal('person-feedback-modal')">Annulla</button><button class="btn btn-primary" onclick="savePersonFeedback()">Salva</button></div></div></div>
+
+    <div id="agenda-table-modal" class="modal"><div class="modal-content"><div class="modal-header"><h3 class="modal-title" id="agenda-table-modal-title">Nuova Tabella</h3><button class="panel-close" onclick="closeModal('agenda-table-modal')">×</button></div><div class="modal-body"><input type="hidden" id="agenda-table-id"><div class="form-group"><label class="form-label">Nome Tabella</label><input type="text" id="agenda-table-name" class="form-input" placeholder="es. Planning Settimanale"></div><div class="form-row"><div class="form-group"><label class="form-label">Righe (inclusa intestazione)</label><input type="number" id="agenda-table-rows" class="form-input" value="4" min="2" max="50"></div><div class="form-group"><label class="form-label">Colonne</label><input type="number" id="agenda-table-cols" class="form-input" value="4" min="1" max="20"></div></div></div><div class="modal-footer"><button class="btn btn-secondary" onclick="closeModal('agenda-table-modal')">Annulla</button><button class="btn btn-primary" onclick="saveAgendaTable()">Crea Tabella</button></div></div></div>
 
     <script>
         // ============ FIREBASE CONFIGURATION ============
@@ -701,7 +709,7 @@
         // ============ FINE FIREBASE ============
 
         var currentDataMode = localStorage.getItem('dataMode') || 'pro';
-        var STORAGE_KEY='manager-dashboard-v7-'+currentDataMode,fileHandle=null,data={people:[],projects:[],tasks:[],teamObjectives:[],milestones:[],thoughts:[],leadershipNotes:[],progressList:[],habits:[],habitCompletions:{},habitComments:{},habitOverrides:{},dayComments:{},weeklyObjectives:{},resourceAssessments:[],cirs:[],topics:[],books:[],specialDayRanges:[],journalEntries:{},ideaBucket:[]},currentPersonId=null,currentProjectId=null,currentBookId=null,currentDay=new Date(),zoomWeeks=1,timelineZoom=1,tempProjectSteps=[],tempTopicSteps=[],tempRAProjects=[],tempCIRPOs=[],tempObjectiveSubgoals=[],draggedProjectId=null,highlightedDateKey=null,currentPeopleFilter='report',showExtraYears=false,lcpSearchFilter='',currentTopicId=null,currentIdeaId=null,topicsTimelineZoom=2,topicsSearchFilter='',topicsTypeFilter='all',topicsCategoryFilter='all',topicsLabelWidth=180,journalViewDate=new Date(),journalSelectedDate=new Date(),currentAttachTarget=null;
+        var STORAGE_KEY='manager-dashboard-v7-'+currentDataMode,fileHandle=null,data={people:[],projects:[],tasks:[],teamObjectives:[],milestones:[],thoughts:[],leadershipNotes:[],progressList:[],habits:[],habitCompletions:{},habitComments:{},habitOverrides:{},dayComments:{},weeklyObjectives:{},resourceAssessments:[],cirs:[],topics:[],books:[],specialDayRanges:[],journalEntries:{},ideaBucket:[],agendaTables:[]},currentPersonId=null,currentProjectId=null,currentBookId=null,currentDay=new Date(),zoomWeeks=1,timelineZoom=1,tempProjectSteps=[],tempTopicSteps=[],tempRAProjects=[],tempCIRPOs=[],tempObjectiveSubgoals=[],draggedProjectId=null,highlightedDateKey=null,currentPeopleFilter='report',showExtraYears=false,lcpSearchFilter='',currentTopicId=null,currentIdeaId=null,topicsTimelineZoom=2,topicsSearchFilter='',topicsTypeFilter='all',topicsCategoryFilter='all',topicsLabelWidth=180,journalViewDate=new Date(),journalSelectedDate=new Date(),currentAttachTarget=null;
         
         function switchDataMode(mode) {
             if (mode === currentDataMode) return;
@@ -767,7 +775,7 @@
                     if (doc.exists && doc.data().data) {
                         var loaded = JSON.parse(doc.data().data);
                         // Reset di nuovo prima di caricare da Firebase
-                        data = {people:[],projects:[],tasks:[],teamObjectives:[],milestones:[],thoughts:[],leadershipNotes:[],progressList:[],habits:[],habitCompletions:{},habitComments:{},habitOverrides:{},dayComments:{},weeklyObjectives:{},resourceAssessments:[],cirs:[],topics:[],specialDayRanges:[],journalEntries:{},settings:{}};
+                        data = {people:[],projects:[],tasks:[],teamObjectives:[],milestones:[],thoughts:[],leadershipNotes:[],progressList:[],habits:[],habitCompletions:{},habitComments:{},habitOverrides:{},dayComments:{},weeklyObjectives:{},resourceAssessments:[],cirs:[],topics:[],specialDayRanges:[],journalEntries:{},settings:{},agendaTables:[]};
                         Object.keys(loaded).forEach(function(k) {
                             if (data.hasOwnProperty(k)) data[k] = loaded[k];
                         });
@@ -1202,7 +1210,196 @@ function adjustColor(hex,amount){var num=parseInt(hex.slice(1),16);var r=Math.mi
         function renderStrategy(){var teamList=document.getElementById('team-objectives-list'),personalList=document.getElementById('personal-objectives-list'),ideasList=document.getElementById('ideas-bucket-list'),progressListEl=document.getElementById('progress-list'),roadmapEl=document.getElementById('roadmap-timeline'),thoughtsList=document.getElementById('thoughts-list'),notesList=document.getElementById('leadership-notes-list');var ideas=(data.ideaBucket||[]).slice().sort(function(a,b){return new Date(b.createdAt)-new Date(a.createdAt)});if(!ideas.length)ideasList.innerHTML='<div class="empty-state"><div class="empty-state-icon">💡</div><p class="empty-state-text">Nessuna idea salvata</p><p style="font-size:.55rem;color:var(--text-muted);margin-top:4px">Seleziona testo nel Journal o Topics e clicca 💡</p></div>';else ideasList.innerHTML=ideas.map(function(i){var sourceIcon=i.sourceType==='journal'?'📓':'🎯';var hasNotes=i.notes&&i.notes.trim();return'<div class="idea-list-item'+(currentIdeaId===i.id?' active':'')+'" onclick="openIdeaPanel(\''+i.id+'\')"><div class="idea-list-item-title">'+i.title+'</div><div class="idea-list-item-meta"><div class="idea-list-item-source">'+sourceIcon+' '+i.sourceName+'</div><div>'+(hasNotes?'📝 ':'')+formatDateFull(i.createdAt)+'</div></div></div>'}).join('');var teamObjs=data.teamObjectives.filter(function(o){return!o.personal}),personalObjs=data.teamObjectives.filter(function(o){return o.personal});if(!teamObjs.length)teamList.innerHTML='<div class="empty-state"><div class="empty-state-icon">🎯</div><p class="empty-state-text">Nessun obiettivo</p></div>';else teamList.innerHTML=teamObjs.map(function(o){var krs=o.subgoals||o.keyResults||[],done=krs.filter(function(k){return k.done}).length,total=krs.length,pct=total?Math.round(done/total*100):0;return'<div class="objective-card"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px"><div style="font-size:.85rem;font-weight:600;cursor:pointer" onclick="openTeamObjectiveModal(\''+o.id+'\')">'+o.title+'</div><button class="btn btn-xs btn-secondary" onclick="deleteObjective(\''+o.id+'\')">🗑️</button></div>'+(o.description?'<div style="font-size:.7rem;color:var(--text-secondary);margin-bottom:8px">'+renderTextWithLinks(o.description)+'</div>':'')+(total?'<div class="progress-bar"><div class="progress-fill" style="width:'+pct+'%"></div></div><div style="font-size:.6rem;color:var(--text-muted);margin:4px 0">'+done+'/'+total+' completati ('+pct+'%)</div>':'')+krs.map(function(k){return'<div class="kr-item"><div class="kr-checkbox'+(k.done?' checked':'')+'" onclick="toggleKR(\''+o.id+'\',\''+k.id+'\')"></div><div style="font-size:.7rem;flex:1;cursor:pointer;'+(k.done?'text-decoration:line-through;color:var(--text-muted)':'')+'" onclick="editKR(\''+o.id+'\',\''+k.id+'\')" title="Clicca per modificare">'+k.text+'</div></div>'}).join('')+'</div>'}).join('');if(!personalObjs.length)personalList.innerHTML='<div class="empty-state"><div class="empty-state-icon">🎯</div><p class="empty-state-text">Nessun obiettivo</p></div>';else personalList.innerHTML=personalObjs.map(function(o){var krs=o.subgoals||o.keyResults||[],done=krs.filter(function(k){return k.done}).length,total=krs.length,pct=total?Math.round(done/total*100):0;return'<div class="objective-card"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px"><div style="font-size:.85rem;font-weight:600;cursor:pointer" onclick="openTeamObjectiveModal(\''+o.id+'\')">'+o.title+'</div><button class="btn btn-xs btn-secondary" onclick="deleteObjective(\''+o.id+'\')">🗑️</button></div>'+(o.description?'<div style="font-size:.7rem;color:var(--text-secondary);margin-bottom:8px">'+renderTextWithLinks(o.description)+'</div>':'')+(total?'<div class="progress-bar"><div class="progress-fill" style="width:'+pct+'%"></div></div><div style="font-size:.6rem;color:var(--text-muted);margin:4px 0">'+done+'/'+total+' completati ('+pct+'%)</div>':'')+krs.map(function(k){return'<div class="kr-item"><div class="kr-checkbox'+(k.done?' checked':'')+'" onclick="toggleKR(\''+o.id+'\',\''+k.id+'\')"></div><div style="font-size:.7rem;flex:1;cursor:pointer;'+(k.done?'text-decoration:line-through;color:var(--text-muted)':'')+'" onclick="editKR(\''+o.id+'\',\''+k.id+'\')" title="Clicca per modificare">'+k.text+'</div></div>'}).join('')+'</div>'}).join('');var progressItems=(data.progressList||[]).slice().sort(function(a,b){return new Date(b.date)-new Date(a.date)});var progressByArea={};progressItems.forEach(function(p){var area=p.area||'Altro';if(!progressByArea[area])progressByArea[area]=[];progressByArea[area].push(p)});if(!progressItems.length)progressListEl.innerHTML='<div class="empty-state"><div class="empty-state-icon">🌱</div><p class="empty-state-text">Nessun progresso annotato</p></div>';else{var progressHtml='';Object.keys(progressByArea).sort().forEach(function(area){progressHtml+='<div class="progress-area-section"><div class="progress-area-title">'+area+' <span class="section-count">'+progressByArea[area].length+'</span></div>';progressHtml+=progressByArea[area].map(function(p){return'<div class="progress-card" onclick="openProgressModal(\''+p.id+'\')"><div class="progress-card-header"><div class="progress-card-date">'+formatDateFull(p.date)+'</div></div><div class="progress-card-content">'+renderTextWithLinks(p.content)+'</div>'+(p.context?'<div class="progress-card-context">📍 '+p.context+'</div>':'')+'</div>'}).join('');progressHtml+='</div>'});progressListEl.innerHTML=progressHtml}var milestones=data.milestones.slice().sort(function(a,b){return new Date(a.date)-new Date(b.date)});if(!milestones.length)roadmapEl.innerHTML='<div class="empty-state"><div class="empty-state-icon">🗺️</div><p class="empty-state-text">Nessuna milestone</p></div>';else roadmapEl.innerHTML=milestones.map(function(m){return'<div class="roadmap-item-section"><div class="roadmap-date">'+formatDateFull(m.date)+'</div><div style="display:flex;justify-content:space-between"><div class="roadmap-item-title" style="cursor:pointer" onclick="openMilestoneModal(\''+m.id+'\')">'+m.title+'</div><button class="btn btn-xs btn-secondary" onclick="deleteMilestone(\''+m.id+'\')">🗑️</button></div>'+(m.description?'<div style="font-size:.7rem;color:var(--text-secondary);margin-top:4px">'+renderTextWithLinks(m.description)+'</div>':'')+'</div>'}).join('');var thoughts=data.thoughts.slice().sort(function(a,b){return new Date(b.createdAt)-new Date(a.createdAt)});if(!thoughts.length)thoughtsList.innerHTML='<div class="empty-state"><div class="empty-state-icon">💭</div><p class="empty-state-text">Nessun pensiero</p></div>';else thoughtsList.innerHTML=thoughts.map(function(t){return'<div class="thought-card"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div class="thought-date">'+formatDateFull(t.createdAt)+'</div><button class="btn btn-xs btn-secondary" onclick="deleteThought(\''+t.id+'\')">🗑️</button></div><div style="font-size:.75rem;line-height:1.5;white-space:pre-wrap;cursor:pointer" onclick="openThoughtModal(\''+t.id+'\')">'+renderTextWithLinks(t.content)+'</div>'+(t.tags&&t.tags.length?'<div class="tags">'+t.tags.map(function(tag){return'<span class="tag">'+tag+'</span>'}).join('')+'</div>':'')+'</div>'}).join('');var notes=data.leadershipNotes.slice().sort(function(a,b){return new Date(b.date)-new Date(a.date)});if(!notes.length)notesList.innerHTML='<div class="empty-state"><div class="empty-state-icon">📝</div><p class="empty-state-text">Nessuna nota</p></div>';else notesList.innerHTML=notes.map(function(n){return'<div class="note-card"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div class="note-date">'+formatDateFull(n.date)+'</div><button class="btn btn-xs btn-secondary" onclick="deleteLeadershipNote(\''+n.id+'\')">🗑️</button></div><div style="font-size:.75rem;line-height:1.5;white-space:pre-wrap;cursor:pointer" onclick="openLeadershipNoteModal(\''+n.id+'\')">'+renderTextWithLinks(n.content)+'</div></div>'}).join('')}
 
         // Init
-        function renderAll(){applyVisibleSections();renderLSWStats();renderWeekTracker();renderHabitsBlocks();renderPeople();renderProjects();renderLCP();renderTopics();renderBooks();renderJournal();renderTasks();renderStrategy()}
+        function renderAll(){applyVisibleSections();renderLSWStats();renderWeekTracker();renderHabitsBlocks();renderPeople();renderProjects();renderLCP();renderTopics();renderBooks();renderJournal();renderTasks();renderStrategy();renderAgendaTables()}
+        
+        // ============ AGENDA TABLES ============
+        function openAgendaTableModal(id){
+            document.getElementById('agenda-table-id').value='';
+            document.getElementById('agenda-table-name').value='';
+            document.getElementById('agenda-table-rows').value='4';
+            document.getElementById('agenda-table-cols').value='4';
+            document.getElementById('agenda-table-modal-title').textContent='Nuova Tabella';
+            if(id){
+                var t=(data.agendaTables||[]).find(function(x){return x.id===id});
+                if(t){
+                    document.getElementById('agenda-table-id').value=t.id;
+                    document.getElementById('agenda-table-name').value=t.name;
+                    document.getElementById('agenda-table-rows').value=t.rows;
+                    document.getElementById('agenda-table-cols').value=t.cols;
+                    document.getElementById('agenda-table-modal-title').textContent='Modifica Tabella';
+                }
+            }
+            openModal('agenda-table-modal');
+        }
+        
+        function saveAgendaTable(){
+            var id=document.getElementById('agenda-table-id').value;
+            var name=document.getElementById('agenda-table-name').value.trim()||'Tabella senza nome';
+            var rows=parseInt(document.getElementById('agenda-table-rows').value)||4;
+            var cols=parseInt(document.getElementById('agenda-table-cols').value)||4;
+            if(rows<2)rows=2;if(rows>50)rows=50;
+            if(cols<1)cols=1;if(cols>20)cols=20;
+            if(!data.agendaTables)data.agendaTables=[];
+            if(id){
+                var idx=data.agendaTables.findIndex(function(t){return t.id===id});
+                if(idx>=0){
+                    var oldRows=data.agendaTables[idx].rows;
+                    var oldCols=data.agendaTables[idx].cols;
+                    var oldData=data.agendaTables[idx].tableData||[];
+                    var newData=[];
+                    for(var r=0;r<rows;r++){
+                        newData[r]=[];
+                        for(var c=0;c<cols;c++){
+                            newData[r][c]=(oldData[r]&&oldData[r][c])?oldData[r][c]:'';
+                        }
+                    }
+                    data.agendaTables[idx].name=name;
+                    data.agendaTables[idx].rows=rows;
+                    data.agendaTables[idx].cols=cols;
+                    data.agendaTables[idx].tableData=newData;
+                }
+            }else{
+                var tableData=[];
+                for(var r=0;r<rows;r++){
+                    tableData[r]=[];
+                    for(var c=0;c<cols;c++){
+                        tableData[r][c]='';
+                    }
+                }
+                data.agendaTables.push({
+                    id:generateId(),
+                    name:name,
+                    rows:rows,
+                    cols:cols,
+                    tableData:tableData,
+                    createdAt:new Date().toISOString()
+                });
+            }
+            closeModal('agenda-table-modal');
+            renderAgendaTables();
+            autoSave();
+            showToast('Tabella salvata');
+        }
+        
+        function deleteAgendaTable(id){
+            if(!confirm('Eliminare questa tabella?'))return;
+            data.agendaTables=(data.agendaTables||[]).filter(function(t){return t.id!==id});
+            renderAgendaTables();
+            autoSave();
+            showToast('Tabella eliminata');
+        }
+        
+        function updateAgendaTableName(id,name){
+            var t=(data.agendaTables||[]).find(function(x){return x.id===id});
+            if(t){t.name=name.trim()||'Tabella senza nome';autoSave();}
+        }
+        
+        function updateAgendaCell(tableId,row,col,value){
+            var t=(data.agendaTables||[]).find(function(x){return x.id===tableId});
+            if(t&&t.tableData&&t.tableData[row]){
+                t.tableData[row][col]=value;
+                autoSave();
+            }
+        }
+        
+        function addAgendaRow(tableId){
+            var t=(data.agendaTables||[]).find(function(x){return x.id===tableId});
+            if(t){
+                var newRow=[];
+                for(var c=0;c<t.cols;c++)newRow.push('');
+                t.tableData.push(newRow);
+                t.rows++;
+                renderAgendaTables();
+                autoSave();
+            }
+        }
+        
+        function removeAgendaRow(tableId){
+            var t=(data.agendaTables||[]).find(function(x){return x.id===tableId});
+            if(t&&t.rows>2){
+                t.tableData.pop();
+                t.rows--;
+                renderAgendaTables();
+                autoSave();
+            }
+        }
+        
+        function addAgendaCol(tableId){
+            var t=(data.agendaTables||[]).find(function(x){return x.id===tableId});
+            if(t){
+                for(var r=0;r<t.tableData.length;r++){
+                    t.tableData[r].push('');
+                }
+                t.cols++;
+                renderAgendaTables();
+                autoSave();
+            }
+        }
+        
+        function removeAgendaCol(tableId){
+            var t=(data.agendaTables||[]).find(function(x){return x.id===tableId});
+            if(t&&t.cols>1){
+                for(var r=0;r<t.tableData.length;r++){
+                    t.tableData[r].pop();
+                }
+                t.cols--;
+                renderAgendaTables();
+                autoSave();
+            }
+        }
+        
+        function renderAgendaTables(){
+            var container=document.getElementById('agenda-tables-container');
+            if(!container)return;
+            var tables=data.agendaTables||[];
+            if(!tables.length){
+                container.innerHTML='<div class="empty-state"><div class="empty-state-icon">📅</div><p class="empty-state-text">Nessuna tabella</p><p style="font-size:.65rem;color:var(--text-muted);margin-top:6px">Clicca + per creare una tabella personalizzata</p></div>';
+                return;
+            }
+            var html='';
+            tables.forEach(function(t){
+                html+='<div class="agenda-table-card">';
+                html+='<div class="agenda-table-header">';
+                html+='<div class="agenda-table-title">📋 <input type="text" value="'+escapeHtml(t.name)+'" onchange="updateAgendaTableName(\''+t.id+'\',this.value)" onclick="this.select()"></div>';
+                html+='<div class="agenda-table-actions">';
+                html+='<button class="btn btn-xs btn-secondary" onclick="openAgendaTableModal(\''+t.id+'\')" title="Modifica dimensioni">⚙️</button>';
+                html+='<button class="btn btn-xs btn-secondary" onclick="deleteAgendaTable(\''+t.id+'\')" title="Elimina">🗑️</button>';
+                html+='</div></div>';
+                html+='<div style="overflow-x:auto"><table class="agenda-table">';
+                for(var r=0;r<t.rows;r++){
+                    html+='<tr>';
+                    for(var c=0;c<t.cols;c++){
+                        var cellValue=(t.tableData&&t.tableData[r]&&t.tableData[r][c])?t.tableData[r][c]:'';
+                        if(r===0){
+                            html+='<th><input type="text" value="'+escapeHtml(cellValue)+'" placeholder="Titolo '+(c+1)+'" onchange="updateAgendaCell(\''+t.id+'\','+r+','+c+',this.value)"></th>';
+                        }else{
+                            html+='<td><input type="text" value="'+escapeHtml(cellValue)+'" onchange="updateAgendaCell(\''+t.id+'\','+r+','+c+',this.value)"></td>';
+                        }
+                    }
+                    html+='</tr>';
+                }
+                html+='</table></div>';
+                html+='<div class="agenda-table-resize">';
+                html+='<span>Righe:</span>';
+                html+='<button class="btn btn-xs btn-secondary" onclick="removeAgendaRow(\''+t.id+'\')">−</button>';
+                html+='<span>'+t.rows+'</span>';
+                html+='<button class="btn btn-xs btn-secondary" onclick="addAgendaRow(\''+t.id+'\')">+</button>';
+                html+='<span style="margin-left:12px">Colonne:</span>';
+                html+='<button class="btn btn-xs btn-secondary" onclick="removeAgendaCol(\''+t.id+'\')">−</button>';
+                html+='<span>'+t.cols+'</span>';
+                html+='<button class="btn btn-xs btn-secondary" onclick="addAgendaCol(\''+t.id+'\')">+</button>';
+                html+='</div>';
+                html+='</div>';
+            });
+            container.innerHTML=html;
+        }
+        
+        function escapeHtml(text){
+            if(!text)return'';
+            var div=document.createElement('div');
+            div.textContent=text;
+            return div.innerHTML;
+        }
         loadFromStorage();
         renderAll();
         updateAuthUI();
