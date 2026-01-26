@@ -248,9 +248,25 @@
                 <div class="habits-blocks" id="habits-blocks"></div>
             </div>
             <div id="page-people" class="page">
-                <div class="page-header"><h1 class="page-title" data-accent="people">People</h1><button class="btn btn-primary btn-add" onclick="openPersonModal()">+</button></div>
-                <div class="tabs"><button class="tab active" onclick="filterPeople('report',this)">Direct Reports</button><button class="tab" onclick="filterPeople('peer',this)">Peers</button><button class="tab" onclick="filterPeople('other',this)">Others</button></div>
-                <div id="people-grid" class="people-grid-compact"></div>
+                <div class="page-header"><h1 class="page-title" data-accent="people">People</h1><button class="btn btn-primary btn-add" id="people-add-btn" onclick="openPersonModal()">+</button></div>
+                <div class="tabs" style="margin-bottom:0;border-bottom:2px solid var(--accent-people)">
+                    <button class="tab active" id="people-tab-people" onclick="switchPeopleView('people')" style="font-weight:600">👥 People</button>
+                    <button class="tab" id="people-tab-staff" onclick="switchPeopleView('staff')" style="font-weight:600">📋 Staff</button>
+                </div>
+                <div id="people-view-people">
+                    <div class="tabs" style="margin-top:10px"><button class="tab active" onclick="filterPeople('report',this)">Direct Reports</button><button class="tab" onclick="filterPeople('peer',this)">Peers</button><button class="tab" onclick="filterPeople('other',this)">Others</button></div>
+                    <div id="people-grid" class="people-grid-compact"></div>
+                </div>
+                <div id="people-view-staff" style="display:none;margin-top:14px">
+                    <div class="lcp-section">
+                        <div class="section-header"><div class="section-title">📊 Tabelle Staff</div><button class="btn btn-sm btn-primary" onclick="openStaffTableModal()">+ Nuova Tabella</button></div>
+                        <div id="staff-tables-container"></div>
+                    </div>
+                    <div class="lcp-section">
+                        <div class="section-header"><div class="section-title">📝 Note Staff</div><button class="btn btn-sm btn-primary" onclick="addStaffNote()">+ Nuova Nota</button></div>
+                        <div id="staff-notes-container"></div>
+                    </div>
+                </div>
             </div>
             <div id="page-projects" class="page">
                 <div class="page-header"><h1 class="page-title" data-accent="projects">Projects</h1><button class="btn btn-primary btn-add" onclick="openProjectModal()">+</button></div>
@@ -262,6 +278,7 @@
                 <div class="page-header"><h1 class="page-title" data-accent="lcp">LCP - Budget & Resources</h1></div>
                 <div class="lcp-section"><div class="section-header"><div class="section-title">📊 Resource Assessment</div><div style="display:flex;gap:6px;align-items:center"><input type="text" id="lcp-search" class="form-input" placeholder="Cerca..." style="width:150px;font-size:.65rem;padding:4px 8px" oninput="filterLCP()"><button class="btn btn-sm btn-secondary" onclick="toggleExtraYears()">+Anni</button><button class="btn btn-sm btn-primary" onclick="openRAModal()">+ Nuova RA</button></div></div><div class="lcp-table-container"><table class="lcp-table"><thead><tr><th>Nome Progetto</th><th>N° RA</th><th>Budget 2026</th><th class="extra-year" style="display:none">Budget 2027</th><th class="extra-year" style="display:none">Budget 2028</th><th class="extra-year" style="display:none">Budget 2029</th><th>Rem. 2026</th><th>Progetti</th></tr></thead><tbody id="ra-table-body"></tbody><tfoot id="ra-table-foot"></tfoot></table></div></div>
                 <div class="lcp-section"><div class="section-header"><div class="section-title">📋 Projects Financing</div><button class="btn btn-sm btn-primary" onclick="openCIRModal()">+ Nuovo Progetto</button></div><div class="lcp-table-container"><table class="lcp-table"><thead><tr><th>ID</th><th>Nome</th><th>N° CIR</th><th>Owner</th><th>Budget 2026</th><th>RA Associate</th><th>Planned PO</th><th>Open PO</th><th>Closed PO</th><th>Rem. 2026</th></tr></thead><tbody id="cir-table-body"></tbody><tfoot id="cir-table-foot"></tfoot></table></div></div>
+                <div class="lcp-section"><div class="section-header"><div class="section-title">📝 Projects Notes</div><button class="btn btn-sm btn-primary" onclick="openNoteProjectModal()">+ Nuovo</button></div><div class="lcp-table-container"><table class="lcp-table"><thead><tr><th style="width:25%">Nome</th><th style="width:15%">Budget Stimato</th><th style="width:15%">Owner</th><th style="width:45%">Commenti</th><th style="width:40px"></th></tr></thead><tbody id="note-projects-body"></tbody></table></div></div>
             </div>
             <div id="page-operations" class="page active">
                 <div class="page-header"><h1 class="page-title" data-accent="operations">Tasks</h1></div>
@@ -435,6 +452,8 @@
 
     <div id="cir-modal" class="modal"><div class="modal-content"><div class="modal-header"><h3 class="modal-title" id="cir-modal-title">Nuovo Progetto</h3><button class="panel-close" onclick="closeModal('cir-modal')">×</button></div><div class="modal-body"><input type="hidden" id="cir-id"><div class="form-row"><div class="form-group"><label class="form-label">ID Progetto</label><input type="text" id="cir-auto-id" class="form-input" readonly style="background:var(--bg-tertiary);font-family:monospace"></div><div class="form-group"><label class="form-label">N° CIR <span style="font-weight:400;opacity:.6">(opzionale)</span></label><input type="text" id="cir-number" class="form-input"></div></div><div class="form-row"><div class="form-group"><label class="form-label">Nome Progetto</label><input type="text" id="cir-name" class="form-input"></div><div class="form-group"><label class="form-label">Owner</label><select id="cir-owner" class="form-select"><option value="">Nessuno</option></select></div></div><div class="form-group"><label class="form-label">Budget 2026</label><input type="number" id="cir-budget" class="form-input" step="0.01" onchange="updateCIRBudgetCheck()"></div><div id="cir-funding-ras-container"></div><div id="cir-budget-check-container"></div><div class="form-group"><label class="form-label">Purchase Orders</label><div id="cir-po-list" style="margin-bottom:6px"></div><div style="display:flex;gap:4px;flex-wrap:wrap"><select id="cir-po-status" class="form-select" style="flex:1"><option value="planned">Planned</option><option value="open">Open</option><option value="closed">Closed</option></select><input type="text" id="cir-po-number" class="form-input" placeholder="N° PO" style="flex:1"><input type="text" id="cir-po-name" class="form-input" placeholder="Nome PO" style="flex:2"><input type="number" id="cir-po-amount" class="form-input" placeholder="Importo" style="flex:1" step="0.01"><button class="btn btn-primary btn-sm" onclick="addCIRPO()">+</button></div></div></div><div class="modal-footer"><button class="btn btn-danger btn-sm" id="cir-delete-btn" onclick="deleteCIR()" style="margin-right:auto;display:none">Elimina</button><button class="btn btn-secondary" onclick="closeModal('cir-modal')">Annulla</button><button class="btn btn-primary" onclick="saveCIR()">Salva</button></div></div></div>
 
+    <div id="note-project-modal" class="modal"><div class="modal-content" style="max-width:500px"><div class="modal-header"><h3 class="modal-title" id="note-project-modal-title">Nuovo Progetto Nota</h3><button class="panel-close" onclick="closeModal('note-project-modal')">×</button></div><div class="modal-body"><input type="hidden" id="note-project-id"><div class="form-group"><label class="form-label">Nome Progetto</label><input type="text" id="note-project-name" class="form-input" placeholder="Nome del progetto"></div><div class="form-group"><label class="form-label">Budget Stimato</label><input type="number" id="note-project-budget" class="form-input" step="0.01" placeholder="0.00"></div><div class="form-group"><label class="form-label">Owner</label><select id="note-project-owner" class="form-select"><option value="">Nessuno</option></select></div><div class="form-group"><label class="form-label">Commenti</label><textarea id="note-project-comments" class="form-textarea" style="min-height:80px" placeholder="Note e commenti sul progetto..."></textarea></div></div><div class="modal-footer"><button class="btn btn-danger btn-sm" id="note-project-delete-btn" onclick="deleteNoteProject()" style="margin-right:auto;display:none">Elimina</button><button class="btn btn-secondary" onclick="closeModal('note-project-modal')">Annulla</button><button class="btn btn-primary" onclick="saveNoteProject()">Salva</button></div></div></div>
+
     <div id="topic-modal" class="modal"><div class="modal-content" style="max-width:500px"><div class="modal-header"><h3 class="modal-title" id="topic-modal-title">Nuovo Topic</h3><button class="panel-close" onclick="closeModal('topic-modal')">×</button></div><div class="modal-body"><input type="hidden" id="topic-id"><div class="form-group"><label class="form-label">Titolo</label><input type="text" id="topic-title" class="form-input" placeholder="Titolo del topic"></div><div class="form-group"><label class="form-label">Descrizione <button class="attach-btn" onclick="triggerFileAttach('topic-description')" title="Allega file" style="float:right;width:20px;height:20px;font-size:.6rem">📎</button></label><textarea id="topic-description" class="form-textarea" style="min-height:60px" placeholder="Descrizione breve del topic"></textarea></div><div class="form-group" style="display:flex;align-items:center;justify-content:space-between;padding:10px;background:var(--bg-tertiary);border-radius:var(--radius-sm)"><div><label class="form-label" style="margin:0">📁 Modalità Progetto</label><div style="font-size:.55rem;color:var(--text-muted)">Attiva per categoria, date e timeline</div></div><label class="toggle-switch"><input type="checkbox" id="topic-is-project" onchange="document.getElementById('topic-project-fields').style.display=this.checked?'block':'none'"><span class="toggle-slider"></span></label></div><div id="topic-project-fields" style="display:none"><div class="form-group"><label class="form-label">Categoria</label><select id="topic-category" class="form-select"><option value="compliance">Compliance-CQP</option><option value="obsolescenza">Obsolescenza</option><option value="improvement">Improvement/Business</option><option value="newproducts">New Products</option></select></div><div class="form-row"><div class="form-group"><label class="form-label">Data Inizio</label><input type="date" id="topic-start-date" class="form-input"></div><div class="form-group"><label class="form-label">Data Fine</label><input type="date" id="topic-end-date" class="form-input"></div></div><div class="form-row"><div class="form-group"><label class="form-label">Icona</label><select id="topic-icon" class="form-select"><option value="🚀">🚀</option><option value="📋">📋</option><option value="⚙️">⚙️</option><option value="📈">📈</option><option value="🆕">🆕</option><option value="💡">💡</option><option value="🔧">🔧</option><option value="📦">📦</option></select></div><div class="form-group"><label class="form-label">Stato Progetto</label><select id="topic-project-status" class="form-select"><option value="planning">Planning</option><option value="active">Attivo</option><option value="on-hold">In Pausa</option><option value="completed">Completato</option></select></div></div><div class="form-group"><label class="form-label">Steps</label><div id="topic-steps-list" style="margin-bottom:6px"></div><div style="display:flex;gap:5px;flex-wrap:wrap"><input type="text" id="topic-new-step-name" class="form-input" placeholder="Nome step" style="flex:2;min-width:100px" onkeydown="if(event.key==='Enter'){event.preventDefault();addTopicStep()}"><select id="topic-new-step-assignee" class="form-select" style="flex:1;min-width:80px"><option value="">Nessuno</option></select><input type="date" id="topic-new-step-start" class="form-input" style="flex:1;min-width:90px"><input type="date" id="topic-new-step-end" class="form-input" style="flex:1;min-width:90px"><button type="button" class="btn btn-primary btn-sm" onclick="addTopicStep()">+</button></div></div></div><div class="form-group" style="display:flex;align-items:center;justify-content:space-between;padding:10px;background:var(--bg-tertiary);border-radius:var(--radius-sm)"><div><label class="form-label" style="margin:0">🤝 Modalità Negoziazione</label><div style="font-size:.55rem;color:var(--text-muted)">Attiva per visualizzare le tabelle negoziali</div></div><label class="toggle-switch"><input type="checkbox" id="topic-is-negotiation" onchange="document.getElementById('topic-negotiation-fields').style.display=this.checked?'block':'none'"><span class="toggle-slider"></span></label></div><div id="topic-negotiation-fields"><div class="form-row"><div class="form-group"><label class="form-label">Data prevista</label><input type="date" id="topic-date" class="form-input"></div><div class="form-group"><label class="form-label">Controparte</label><input type="text" id="topic-counterpart" class="form-input"></div></div><div class="form-row"><div class="form-group"><label class="form-label">Mio ruolo</label><input type="text" id="topic-role" class="form-input"></div><div class="form-group"><label class="form-label">Posta in gioco</label><select id="topic-stakes" class="form-select"><option value="alta">Alta</option><option value="media">Media</option><option value="bassa">Bassa</option></select></div></div></div><div class="form-group"><label class="form-label">Stato</label><select id="topic-status" class="form-select"><option value="active">Attivo</option><option value="closed">Chiuso</option></select></div></div><div class="modal-footer"><button class="btn btn-danger btn-sm" id="topic-delete-btn" onclick="deleteTopic()" style="margin-right:auto;display:none">Elimina</button><button class="btn btn-secondary" onclick="closeModal('topic-modal')">Annulla</button><button class="btn btn-primary" onclick="saveTopic()">Salva</button></div></div></div>
 
     <div id="topic-step-modal" class="modal"><div class="modal-content" style="max-width:400px"><div class="modal-header"><h3 class="modal-title">Modifica Step</h3><button class="panel-close" onclick="closeModal('topic-step-modal')">×</button></div><div class="modal-body"><input type="hidden" id="step-topic-id"><input type="hidden" id="step-id"><div class="form-group"><label class="form-label">Nome Step</label><input type="text" id="step-name" class="form-input"></div><div class="form-group"><label class="form-label">Assegnato a</label><select id="step-assignee" class="form-select"><option value="">Nessuno</option></select></div><div class="form-row"><div class="form-group"><label class="form-label">Data Inizio</label><input type="date" id="step-start" class="form-input"></div><div class="form-group"><label class="form-label">Data Fine</label><input type="date" id="step-end" class="form-input"></div></div><div class="form-group"><label class="form-label">Completato</label><label class="toggle-switch"><input type="checkbox" id="step-completed"><span class="toggle-slider"></span></label></div></div><div class="modal-footer"><button type="button" class="btn btn-danger btn-sm" onclick="deleteTopicStepFromModal()" style="margin-right:auto">Elimina</button><button type="button" class="btn btn-secondary" onclick="closeModal('topic-step-modal')">Annulla</button><button type="button" class="btn btn-primary" onclick="saveTopicStepFromModal()">Salva</button></div></div></div>
@@ -462,6 +481,8 @@
     <div id="person-feedback-modal" class="modal"><div class="modal-content"><div class="modal-header"><h3 class="modal-title">Feedback/Nota</h3><button class="panel-close" onclick="closeModal('person-feedback-modal')">×</button></div><div class="modal-body"><input type="hidden" id="pfeedback-id"><input type="hidden" id="pfeedback-person-id"><div class="form-group"><label class="form-label">Data</label><input type="date" id="pfeedback-date" class="form-input"></div><div class="form-group"><label class="form-label">Nota</label><textarea id="pfeedback-text" class="form-textarea"></textarea></div></div><div class="modal-footer"><button class="btn btn-secondary" onclick="closeModal('person-feedback-modal')">Annulla</button><button class="btn btn-primary" onclick="savePersonFeedback()">Salva</button></div></div></div>
 
     <div id="agenda-table-modal" class="modal"><div class="modal-content"><div class="modal-header"><h3 class="modal-title" id="agenda-table-modal-title">Nuova Tabella</h3><button class="panel-close" onclick="closeModal('agenda-table-modal')">×</button></div><div class="modal-body"><input type="hidden" id="agenda-table-id"><div class="form-group"><label class="form-label">Nome Tabella</label><input type="text" id="agenda-table-name" class="form-input" placeholder="es. Planning Settimanale"></div><div class="form-row"><div class="form-group"><label class="form-label">Righe (inclusa intestazione)</label><input type="number" id="agenda-table-rows" class="form-input" value="4" min="2" max="50"></div><div class="form-group"><label class="form-label">Colonne</label><input type="number" id="agenda-table-cols" class="form-input" value="4" min="1" max="20"></div></div></div><div class="modal-footer"><button class="btn btn-secondary" onclick="closeModal('agenda-table-modal')">Annulla</button><button class="btn btn-primary" onclick="saveAgendaTable()">Crea Tabella</button></div></div></div>
+
+    <div id="staff-table-modal" class="modal"><div class="modal-content"><div class="modal-header"><h3 class="modal-title" id="staff-table-modal-title">Nuova Tabella Staff</h3><button class="panel-close" onclick="closeModal('staff-table-modal')">×</button></div><div class="modal-body"><input type="hidden" id="staff-table-id"><div class="form-group"><label class="form-label">Nome Tabella</label><input type="text" id="staff-table-name" class="form-input" placeholder="es. Competenze Team"></div><div class="form-row"><div class="form-group"><label class="form-label">Righe (inclusa intestazione)</label><input type="number" id="staff-table-rows" class="form-input" value="4" min="2" max="50"></div><div class="form-group"><label class="form-label">Colonne</label><input type="number" id="staff-table-cols" class="form-input" value="4" min="1" max="20"></div></div></div><div class="modal-footer"><button class="btn btn-secondary" onclick="closeModal('staff-table-modal')">Annulla</button><button class="btn btn-primary" onclick="saveStaffTable()">Crea Tabella</button></div></div></div>
 
     <script>
         // ============ FIREBASE CONFIGURATION ============
@@ -709,7 +730,7 @@
         // ============ FINE FIREBASE ============
 
         var currentDataMode = localStorage.getItem('dataMode') || 'pro';
-        var STORAGE_KEY='manager-dashboard-v7-'+currentDataMode,fileHandle=null,data={people:[],projects:[],tasks:[],teamObjectives:[],milestones:[],thoughts:[],leadershipNotes:[],progressList:[],habits:[],habitCompletions:{},habitComments:{},habitOverrides:{},dayComments:{},weeklyObjectives:{},resourceAssessments:[],cirs:[],topics:[],books:[],specialDayRanges:[],journalEntries:{},ideaBucket:[],agendaTables:[]},currentPersonId=null,currentProjectId=null,currentBookId=null,currentDay=new Date(),zoomWeeks=1,timelineZoom=1,tempProjectSteps=[],tempTopicSteps=[],tempRAProjects=[],tempCIRPOs=[],tempObjectiveSubgoals=[],draggedProjectId=null,highlightedDateKey=null,currentPeopleFilter='report',showExtraYears=false,lcpSearchFilter='',currentTopicId=null,currentIdeaId=null,topicsTimelineZoom=2,topicsSearchFilter='',topicsTypeFilter='all',topicsCategoryFilter='all',topicsLabelWidth=180,journalViewDate=new Date(),journalSelectedDate=new Date(),currentAttachTarget=null;
+        var STORAGE_KEY='manager-dashboard-v7-'+currentDataMode,fileHandle=null,data={people:[],projects:[],tasks:[],teamObjectives:[],milestones:[],thoughts:[],leadershipNotes:[],progressList:[],habits:[],habitCompletions:{},habitComments:{},habitOverrides:{},dayComments:{},weeklyObjectives:{},resourceAssessments:[],cirs:[],topics:[],books:[],specialDayRanges:[],journalEntries:{},ideaBucket:[],agendaTables:[],noteProjects:[],staffTables:[],staffNotes:[]},currentPersonId=null,currentProjectId=null,currentBookId=null,currentDay=new Date(),zoomWeeks=1,timelineZoom=1,tempProjectSteps=[],tempTopicSteps=[],tempRAProjects=[],tempCIRPOs=[],tempObjectiveSubgoals=[],draggedProjectId=null,highlightedDateKey=null,currentPeopleFilter='report',showExtraYears=false,lcpSearchFilter='',currentTopicId=null,currentIdeaId=null,topicsTimelineZoom=2,topicsSearchFilter='',topicsTypeFilter='all',topicsCategoryFilter='all',topicsLabelWidth=180,journalViewDate=new Date(),journalSelectedDate=new Date(),currentAttachTarget=null,currentPeopleView='people';
         
         function switchDataMode(mode) {
             if (mode === currentDataMode) return;
@@ -775,7 +796,7 @@
                     if (doc.exists && doc.data().data) {
                         var loaded = JSON.parse(doc.data().data);
                         // Reset di nuovo prima di caricare da Firebase
-                        data = {people:[],projects:[],tasks:[],teamObjectives:[],milestones:[],thoughts:[],leadershipNotes:[],progressList:[],habits:[],habitCompletions:{},habitComments:{},habitOverrides:{},dayComments:{},weeklyObjectives:{},resourceAssessments:[],cirs:[],topics:[],specialDayRanges:[],journalEntries:{},settings:{},agendaTables:[]};
+                        data = {people:[],projects:[],tasks:[],teamObjectives:[],milestones:[],thoughts:[],leadershipNotes:[],progressList:[],habits:[],habitCompletions:{},habitComments:{},habitOverrides:{},dayComments:{},weeklyObjectives:{},resourceAssessments:[],cirs:[],topics:[],specialDayRanges:[],journalEntries:{},settings:{},agendaTables:[],noteProjects:[],staffTables:[],staffNotes:[]};
                         Object.keys(loaded).forEach(function(k) {
                             if (data.hasOwnProperty(k)) data[k] = loaded[k];
                         });
@@ -837,7 +858,7 @@
         function downloadJson(){var json=JSON.stringify(data,null,2),blob=new Blob([json],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='manager-dashboard.json';a.click();URL.revokeObjectURL(url);showToast('File scaricato')}
         function loadDataFromFile(e){var file=e.target.files[0];if(!file)return;var reader=new FileReader();reader.onload=function(ev){try{var loaded=JSON.parse(ev.target.result);Object.keys(loaded).forEach(function(k){if(data.hasOwnProperty(k))data[k]=loaded[k]});migrateSpecialDays();renderAll();autoSave();showToast('Caricato')}catch(err){showToast('Errore','error')}};reader.readAsText(file);e.target.value=''}
         function mergeDataFiles(e){var files=e.target.files;if(!files||files.length<2){showToast('Seleziona due file JSON','error');e.target.value='';return}var file1=files[0],file2=files[1];var reader1=new FileReader(),reader2=new FileReader();var data1=null,data2=null;reader1.onload=function(ev){try{data1=JSON.parse(ev.target.result);if(data2)performMerge(data1,data2)}catch(err){showToast('Errore lettura file 1','error')}};reader2.onload=function(ev){try{data2=JSON.parse(ev.target.result);if(data1)performMerge(data1,data2)}catch(err){showToast('Errore lettura file 2','error')}};reader1.readAsText(file1);reader2.readAsText(file2);e.target.value=''}
-        function performMerge(d1,d2){var arrayKeys=['people','projects','tasks','teamObjectives','milestones','thoughts','leadershipNotes','progressList','habits','resourceAssessments','cirs','topics','specialDayRanges','books','agendaTables','ideaBucket'];var objectKeys=['habitCompletions','habitComments','habitOverrides','dayComments','weeklyObjectives','journalEntries'];var merged={};arrayKeys.forEach(function(k){var arr1=d1[k]||[],arr2=d2[k]||[];var byId={};arr1.forEach(function(item){if(item.id)byId[item.id]=item});arr2.forEach(function(item){if(item.id){var existing=byId[item.id];if(existing){var t1=getItemTimestamp(existing),t2=getItemTimestamp(item);if(t2>t1)byId[item.id]=item}else{byId[item.id]=item}}});merged[k]=Object.values(byId)});objectKeys.forEach(function(k){var obj1=d1[k]||{},obj2=d2[k]||{};merged[k]=Object.assign({},obj1,obj2);Object.keys(obj1).forEach(function(key){if(obj2.hasOwnProperty(key)){var v1=obj1[key],v2=obj2[key];if(typeof v1==='object'&&v1&&v1.updatedAt&&typeof v2==='object'&&v2&&v2.updatedAt){merged[k][key]=new Date(v1.updatedAt)>new Date(v2.updatedAt)?v1:v2}else if(typeof v2==='object'&&v2&&v2.updatedAt){merged[k][key]=v2}else if(typeof v1==='object'&&v1&&v1.updatedAt){merged[k][key]=v1}}})});Object.keys(merged).forEach(function(k){if(data.hasOwnProperty(k))data[k]=merged[k]});migrateSpecialDays();renderAll();autoSave();var totalItems=arrayKeys.reduce(function(sum,k){return sum+(merged[k]||[]).length},0);showToast('Unione completata! '+totalItems+' elementi')}
+        function performMerge(d1,d2){var arrayKeys=['people','projects','tasks','teamObjectives','milestones','thoughts','leadershipNotes','progressList','habits','resourceAssessments','cirs','topics','specialDayRanges','books','agendaTables','ideaBucket','noteProjects','staffTables','staffNotes'];var objectKeys=['habitCompletions','habitComments','habitOverrides','dayComments','weeklyObjectives','journalEntries'];var merged={};arrayKeys.forEach(function(k){var arr1=d1[k]||[],arr2=d2[k]||[];var byId={};arr1.forEach(function(item){if(item.id)byId[item.id]=item});arr2.forEach(function(item){if(item.id){var existing=byId[item.id];if(existing){var t1=getItemTimestamp(existing),t2=getItemTimestamp(item);if(t2>t1)byId[item.id]=item}else{byId[item.id]=item}}});merged[k]=Object.values(byId)});objectKeys.forEach(function(k){var obj1=d1[k]||{},obj2=d2[k]||{};merged[k]=Object.assign({},obj1,obj2);Object.keys(obj1).forEach(function(key){if(obj2.hasOwnProperty(key)){var v1=obj1[key],v2=obj2[key];if(typeof v1==='object'&&v1&&v1.updatedAt&&typeof v2==='object'&&v2&&v2.updatedAt){merged[k][key]=new Date(v1.updatedAt)>new Date(v2.updatedAt)?v1:v2}else if(typeof v2==='object'&&v2&&v2.updatedAt){merged[k][key]=v2}else if(typeof v1==='object'&&v1&&v1.updatedAt){merged[k][key]=v1}}})});Object.keys(merged).forEach(function(k){if(data.hasOwnProperty(k))data[k]=merged[k]});migrateSpecialDays();renderAll();autoSave();var totalItems=arrayKeys.reduce(function(sum,k){return sum+(merged[k]||[]).length},0);showToast('Unione completata! '+totalItems+' elementi')}
         function getItemTimestamp(item){if(!item)return 0;var ts=item.updatedAt||item.createdAt||item.date||'';return ts?new Date(ts).getTime():0}
         function switchSection(s){document.querySelectorAll('.nav-item').forEach(function(i){i.classList.remove('active')});document.querySelector('.nav-item[data-section="'+s+'"]').classList.add('active');document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active')});document.getElementById('page-'+s).classList.add('active');updateMobileNavBySection(s);closeMobileSidebar();window.scrollTo(0,0)}
         function toggleMobileSidebar(){document.getElementById('sidebar').classList.toggle('open');document.querySelector('.sidebar-overlay').classList.toggle('visible')}
@@ -998,9 +1019,98 @@ function adjustColor(hex,amount){var num=parseInt(hex.slice(1),16);var r=Math.mi
         function renderCIRFundingRAs(cirId){var container=document.getElementById('cir-funding-ras-container');var checkContainer=document.getElementById('cir-budget-check-container');if(!container||!cirId){if(container)container.innerHTML='';if(checkContainer)checkContainer.innerHTML='';return}var fundingRAs=[];var totalAllocated=0;data.resourceAssessments.forEach(function(ra){(ra.projects||[]).forEach(function(p){if(p.projectId===cirId){fundingRAs.push({raName:ra.name,raNumber:ra.number,budget:p.budget,year:p.year});totalAllocated+=p.budget}})});if(!fundingRAs.length){container.innerHTML='';checkContainer.innerHTML='';return}container.innerHTML='<div class="form-group"><label class="form-label">📊 RA che finanziano questo progetto <span style="font-weight:400;opacity:.6">(non modificabile)</span></label><div style="background:var(--bg-tertiary);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px;font-size:.65rem">'+fundingRAs.map(function(ra){return'<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px dashed var(--border)"><span>'+ra.raName+(ra.raNumber?' ('+ra.raNumber+')':'')+'</span><span style="font-family:monospace">'+formatCurrency(ra.budget)+' ('+ra.year+')</span></div>'}).join('')+'<div style="display:flex;justify-content:space-between;padding:6px 0;font-weight:700;margin-top:4px"><span>TOTALE ALLOCATO</span><span style="font-family:monospace">'+formatCurrency(totalAllocated)+'</span></div></div></div>';updateCIRBudgetCheckDisplay(totalAllocated)}
         function updateCIRBudgetCheck(){var cirId=document.getElementById('cir-id').value;if(cirId)renderCIRFundingRAs(cirId)}
         function updateCIRBudgetCheckDisplay(totalAllocated){var checkContainer=document.getElementById('cir-budget-check-container');if(!checkContainer)return;var cirBudget=parseFloat(document.getElementById('cir-budget').value)||0;var diff=totalAllocated-cirBudget;var isMatch=Math.abs(diff)<0.01;var statusColor=isMatch?'var(--success)':(diff>0?'var(--warning)':'var(--danger)');var statusIcon=isMatch?'✅':(diff>0?'⚠️':'❌');var statusText=isMatch?'Budget corrispondente':(diff>0?'Budget RA superiore di '+formatCurrency(diff):'Budget RA inferiore di '+formatCurrency(Math.abs(diff)));checkContainer.innerHTML='<div style="background:'+(isMatch?'rgba(16,185,129,.1)':'rgba(239,68,68,.1)')+';border:1px solid '+statusColor+';border-radius:var(--radius-sm);padding:8px;margin-bottom:10px;font-size:.65rem;display:flex;align-items:center;gap:8px"><span style="font-size:1rem">'+statusIcon+'</span><span style="color:'+statusColor+';font-weight:600">'+statusText+'</span></div>'}
-        function renderLCP(){var raBody=document.getElementById('ra-table-body'),cirBody=document.getElementById('cir-table-body'),raFoot=document.getElementById('ra-table-foot'),cirFoot=document.getElementById('cir-table-foot');var filter=lcpSearchFilter.toLowerCase();var filteredRAs=data.resourceAssessments.filter(function(ra){if(!filter)return true;return ra.name.toLowerCase().includes(filter)||ra.number.toLowerCase().includes(filter)||(ra.projects||[]).some(function(p){return p.name.toLowerCase().includes(filter)})});var filteredCIRs=data.cirs.filter(function(cir){if(!filter)return true;var owner=cir.ownerId?data.people.find(function(p){return p.id===cir.ownerId}):null;var ownerName=cir.ownerId==='me'?'Stefano Pascali':(owner?owner.name:'');return cir.name.toLowerCase().includes(filter)||cir.number.toLowerCase().includes(filter)||(ownerName&&ownerName.toLowerCase().includes(filter))});var extraStyle=showExtraYears?'':'display:none';document.querySelectorAll('.extra-year').forEach(function(el){el.style.display=showExtraYears?'':'none'});var totBudget2026=0,totRem2026=0;if(!filteredRAs.length)raBody.innerHTML='<tr><td colspan="8" style="text-align:center;color:var(--text-muted);padding:16px">Nessuna RA</td></tr>';else raBody.innerHTML=filteredRAs.map(function(ra){var spent={2026:0,2027:0,2028:0,2029:0};(ra.projects||[]).forEach(function(p){spent[p.year]=(spent[p.year]||0)+p.budget});var rem2026=(ra.budget2026||0)-spent['2026'];totBudget2026+=(ra.budget2026||0);totRem2026+=rem2026;var projNames=(ra.projects||[]).map(function(p){return p.name}).join(', ')||'-';var cir=ra.cirId?data.cirs.find(function(c){return c.id===ra.cirId}):null;var cirLabel=cir?cir.number:'';return'<tr onclick="openRAModal(\''+ra.id+'\')"><td>'+ra.name+(cirLabel?' <span style="color:var(--text-muted);font-size:.55rem">('+cirLabel+')</span>':'')+'</td><td>'+ra.number+'</td><td class="budget-cell">'+formatCurrency(ra.budget2026)+'</td><td class="budget-cell extra-year" style="'+extraStyle+'">'+formatCurrency(ra.budget2027)+'</td><td class="budget-cell extra-year" style="'+extraStyle+'">'+formatCurrency(ra.budget2028)+'</td><td class="budget-cell extra-year" style="'+extraStyle+'">'+formatCurrency(ra.budget2029)+'</td><td class="budget-cell '+(rem2026>=0?'budget-positive':'budget-negative')+'">'+formatCurrency(rem2026)+'</td><td style="font-size:.55rem;max-width:150px;overflow:hidden;text-overflow:ellipsis" title="'+projNames+'">'+projNames+'</td></tr>'}).join('');raFoot.innerHTML='<tr style="font-weight:700;background:var(--bg-tertiary)"><td>TOTALE</td><td></td><td class="budget-cell">'+formatCurrency(totBudget2026)+'</td><td class="budget-cell extra-year" style="'+extraStyle+'"></td><td class="budget-cell extra-year" style="'+extraStyle+'"></td><td class="budget-cell extra-year" style="'+extraStyle+'"></td><td class="budget-cell '+(totRem2026>=0?'budget-positive':'budget-negative')+'">'+formatCurrency(totRem2026)+'</td><td></td></tr>';var totCIRBudget=0,totCIRPlanned=0,totCIROpen=0,totCIRClosed=0,totCIRRem=0;if(!filteredCIRs.length)cirBody.innerHTML='<tr><td colspan="10" style="text-align:center;color:var(--text-muted);padding:16px">Nessun Progetto</td></tr>';else cirBody.innerHTML=filteredCIRs.map(function(cir,idx){var pos=cir.pos||[],planned=pos.filter(function(p){return p.status==='planned'}).reduce(function(a,p){return a+p.amount},0),open=pos.filter(function(p){return p.status==='open'}).reduce(function(a,p){return a+p.amount},0),closed=pos.filter(function(p){return p.status==='closed'}).reduce(function(a,p){return a+p.amount},0),remaining=cir.budget-planned-open-closed;var owner=cir.ownerId?data.people.find(function(p){return p.id===cir.ownerId}):null;var ownerName=cir.ownerId==='me'?'Stefano Pascali':(owner?owner.name:'-');var raAssoc=data.resourceAssessments.filter(function(ra){return(ra.projects||[]).some(function(rp){return rp.projectId===cir.id})}).map(function(ra){var proj=(ra.projects||[]).find(function(rp){return rp.projectId===cir.id});return ra.number+': '+formatCurrency(proj?proj.budget:0)});var raLabel=raAssoc.length?raAssoc.join(', '):'-';var displayId=cir.autoId||('#'+(data.cirs.indexOf(cir)+1));totCIRBudget+=cir.budget;totCIRPlanned+=planned;totCIROpen+=open;totCIRClosed+=closed;totCIRRem+=remaining;return'<tr onclick="openCIRModal(\''+cir.id+'\')"><td style="font-family:monospace;font-size:.7rem;font-weight:700;color:var(--accent-lcp)">'+displayId+'</td><td>'+cir.name+'</td><td>'+(cir.number||'-')+'</td><td style="font-size:.6rem">'+ownerName+'</td><td class="budget-cell">'+formatCurrency(cir.budget)+'</td><td style="font-size:.55rem;max-width:120px;overflow:hidden;text-overflow:ellipsis" title="'+raLabel+'">'+raLabel+'</td><td class="budget-cell">'+formatCurrency(planned)+'</td><td class="budget-cell">'+formatCurrency(open)+'</td><td class="budget-cell">'+formatCurrency(closed)+'</td><td class="budget-cell '+(remaining>=0?'budget-positive':'budget-negative')+'">'+formatCurrency(remaining)+'</td></tr>'}).join('');cirFoot.innerHTML='<tr style="font-weight:700;background:var(--bg-tertiary)"><td>TOTALE</td><td></td><td></td><td></td><td class="budget-cell">'+formatCurrency(totCIRBudget)+'</td><td></td><td class="budget-cell">'+formatCurrency(totCIRPlanned)+'</td><td class="budget-cell">'+formatCurrency(totCIROpen)+'</td><td class="budget-cell">'+formatCurrency(totCIRClosed)+'</td><td class="budget-cell '+(totCIRRem>=0?'budget-positive':'budget-negative')+'">'+formatCurrency(totCIRRem)+'</td></tr>'}
+        function renderLCP(){var raBody=document.getElementById('ra-table-body'),cirBody=document.getElementById('cir-table-body'),raFoot=document.getElementById('ra-table-foot'),cirFoot=document.getElementById('cir-table-foot');var filter=lcpSearchFilter.toLowerCase();var filteredRAs=data.resourceAssessments.filter(function(ra){if(!filter)return true;return ra.name.toLowerCase().includes(filter)||ra.number.toLowerCase().includes(filter)||(ra.projects||[]).some(function(p){return p.name.toLowerCase().includes(filter)})});var filteredCIRs=data.cirs.filter(function(cir){if(!filter)return true;var owner=cir.ownerId?data.people.find(function(p){return p.id===cir.ownerId}):null;var ownerName=cir.ownerId==='me'?'Stefano Pascali':(owner?owner.name:'');return cir.name.toLowerCase().includes(filter)||cir.number.toLowerCase().includes(filter)||(ownerName&&ownerName.toLowerCase().includes(filter))});var extraStyle=showExtraYears?'':'display:none';document.querySelectorAll('.extra-year').forEach(function(el){el.style.display=showExtraYears?'':'none'});var totBudget2026=0,totRem2026=0;if(!filteredRAs.length)raBody.innerHTML='<tr><td colspan="8" style="text-align:center;color:var(--text-muted);padding:16px">Nessuna RA</td></tr>';else raBody.innerHTML=filteredRAs.map(function(ra){var spent={2026:0,2027:0,2028:0,2029:0};(ra.projects||[]).forEach(function(p){spent[p.year]=(spent[p.year]||0)+p.budget});var rem2026=(ra.budget2026||0)-spent['2026'];totBudget2026+=(ra.budget2026||0);totRem2026+=rem2026;var projNames=(ra.projects||[]).map(function(p){return p.name}).join(', ')||'-';var cir=ra.cirId?data.cirs.find(function(c){return c.id===ra.cirId}):null;var cirLabel=cir?cir.number:'';return'<tr onclick="openRAModal(\''+ra.id+'\')"><td>'+ra.name+(cirLabel?' <span style="color:var(--text-muted);font-size:.55rem">('+cirLabel+')</span>':'')+'</td><td>'+ra.number+'</td><td class="budget-cell">'+formatCurrency(ra.budget2026)+'</td><td class="budget-cell extra-year" style="'+extraStyle+'">'+formatCurrency(ra.budget2027)+'</td><td class="budget-cell extra-year" style="'+extraStyle+'">'+formatCurrency(ra.budget2028)+'</td><td class="budget-cell extra-year" style="'+extraStyle+'">'+formatCurrency(ra.budget2029)+'</td><td class="budget-cell '+(rem2026>=0?'budget-positive':'budget-negative')+'">'+formatCurrency(rem2026)+'</td><td style="font-size:.55rem;max-width:150px;overflow:hidden;text-overflow:ellipsis" title="'+projNames+'">'+projNames+'</td></tr>'}).join('');raFoot.innerHTML='<tr style="font-weight:700;background:var(--bg-tertiary)"><td>TOTALE</td><td></td><td class="budget-cell">'+formatCurrency(totBudget2026)+'</td><td class="budget-cell extra-year" style="'+extraStyle+'"></td><td class="budget-cell extra-year" style="'+extraStyle+'"></td><td class="budget-cell extra-year" style="'+extraStyle+'"></td><td class="budget-cell '+(totRem2026>=0?'budget-positive':'budget-negative')+'">'+formatCurrency(totRem2026)+'</td><td></td></tr>';var totCIRBudget=0,totCIRPlanned=0,totCIROpen=0,totCIRClosed=0,totCIRRem=0;if(!filteredCIRs.length)cirBody.innerHTML='<tr><td colspan="10" style="text-align:center;color:var(--text-muted);padding:16px">Nessun Progetto</td></tr>';else cirBody.innerHTML=filteredCIRs.map(function(cir,idx){var pos=cir.pos||[],planned=pos.filter(function(p){return p.status==='planned'}).reduce(function(a,p){return a+p.amount},0),open=pos.filter(function(p){return p.status==='open'}).reduce(function(a,p){return a+p.amount},0),closed=pos.filter(function(p){return p.status==='closed'}).reduce(function(a,p){return a+p.amount},0),remaining=cir.budget-planned-open-closed;var owner=cir.ownerId?data.people.find(function(p){return p.id===cir.ownerId}):null;var ownerName=cir.ownerId==='me'?'Stefano Pascali':(owner?owner.name:'-');var raAssoc=data.resourceAssessments.filter(function(ra){return(ra.projects||[]).some(function(rp){return rp.projectId===cir.id})}).map(function(ra){var proj=(ra.projects||[]).find(function(rp){return rp.projectId===cir.id});return ra.number+': '+formatCurrency(proj?proj.budget:0)});var raLabel=raAssoc.length?raAssoc.join(', '):'-';var displayId=cir.autoId||('#'+(data.cirs.indexOf(cir)+1));totCIRBudget+=cir.budget;totCIRPlanned+=planned;totCIROpen+=open;totCIRClosed+=closed;totCIRRem+=remaining;return'<tr onclick="openCIRModal(\''+cir.id+'\')"><td style="font-family:monospace;font-size:.7rem;font-weight:700;color:var(--accent-lcp)">'+displayId+'</td><td>'+cir.name+'</td><td>'+(cir.number||'-')+'</td><td style="font-size:.6rem">'+ownerName+'</td><td class="budget-cell">'+formatCurrency(cir.budget)+'</td><td style="font-size:.55rem;max-width:120px;overflow:hidden;text-overflow:ellipsis" title="'+raLabel+'">'+raLabel+'</td><td class="budget-cell">'+formatCurrency(planned)+'</td><td class="budget-cell">'+formatCurrency(open)+'</td><td class="budget-cell">'+formatCurrency(closed)+'</td><td class="budget-cell '+(remaining>=0?'budget-positive':'budget-negative')+'">'+formatCurrency(remaining)+'</td></tr>'}).join('');cirFoot.innerHTML='<tr style="font-weight:700;background:var(--bg-tertiary)"><td>TOTALE</td><td></td><td></td><td></td><td class="budget-cell">'+formatCurrency(totCIRBudget)+'</td><td></td><td class="budget-cell">'+formatCurrency(totCIRPlanned)+'</td><td class="budget-cell">'+formatCurrency(totCIROpen)+'</td><td class="budget-cell">'+formatCurrency(totCIRClosed)+'</td><td class="budget-cell '+(totCIRRem>=0?'budget-positive':'budget-negative')+'">'+formatCurrency(totCIRRem)+'</td></tr>';renderNoteProjects()}
         function toggleExtraYears(){showExtraYears=!showExtraYears;renderLCP()}
         function filterLCP(){lcpSearchFilter=document.getElementById('lcp-search').value;renderLCP()}
+        function openNoteProjectModal(id){
+            document.getElementById('note-project-id').value='';
+            document.getElementById('note-project-name').value='';
+            document.getElementById('note-project-budget').value='';
+            document.getElementById('note-project-comments').value='';
+            document.getElementById('note-project-modal-title').textContent='Nuovo Progetto Nota';
+            document.getElementById('note-project-delete-btn').style.display='none';
+            populateNoteProjectOwnerSelect();
+            if(id){
+                var np=(data.noteProjects||[]).find(function(x){return x.id===id});
+                if(np){
+                    document.getElementById('note-project-id').value=np.id;
+                    document.getElementById('note-project-name').value=np.name||'';
+                    document.getElementById('note-project-budget').value=np.budget||'';
+                    document.getElementById('note-project-owner').value=np.ownerId||'';
+                    document.getElementById('note-project-comments').value=np.comments||'';
+                    document.getElementById('note-project-modal-title').textContent='Modifica Progetto Nota';
+                    document.getElementById('note-project-delete-btn').style.display='block';
+                }
+            }
+            openModal('note-project-modal');
+        }
+        function populateNoteProjectOwnerSelect(){
+            var sel=document.getElementById('note-project-owner');
+            sel.innerHTML='<option value="">Nessuno</option><option value="me">Stefano Pascali</option>'+data.people.map(function(p){return'<option value="'+p.id+'">'+p.name+'</option>'}).join('');
+        }
+        function saveNoteProject(){
+            var id=document.getElementById('note-project-id').value;
+            var name=document.getElementById('note-project-name').value.trim();
+            var budget=parseFloat(document.getElementById('note-project-budget').value)||0;
+            var ownerId=document.getElementById('note-project-owner').value;
+            var comments=document.getElementById('note-project-comments').value.trim();
+            if(!name){showToast('Nome richiesto','error');return}
+            if(!data.noteProjects)data.noteProjects=[];
+            if(id){
+                var idx=data.noteProjects.findIndex(function(np){return np.id===id});
+                if(idx>=0){
+                    data.noteProjects[idx].name=name;
+                    data.noteProjects[idx].budget=budget;
+                    data.noteProjects[idx].ownerId=ownerId;
+                    data.noteProjects[idx].comments=comments;
+                    data.noteProjects[idx].updatedAt=new Date().toISOString();
+                }
+            }else{
+                data.noteProjects.push({id:generateId(),name:name,budget:budget,ownerId:ownerId,comments:comments,createdAt:new Date().toISOString()});
+            }
+            closeModal('note-project-modal');
+            renderLCP();
+            autoSave();
+            showToast('Salvato');
+        }
+        function deleteNoteProject(){
+            var id=document.getElementById('note-project-id').value;
+            if(!confirm('Eliminare questo progetto nota?'))return;
+            data.noteProjects=(data.noteProjects||[]).filter(function(np){return np.id!==id});
+            closeModal('note-project-modal');
+            renderLCP();
+            autoSave();
+            showToast('Eliminato');
+        }
+        function renderNoteProjects(){
+            var body=document.getElementById('note-projects-body');
+            if(!body)return;
+            var noteProjects=data.noteProjects||[];
+            var filter=lcpSearchFilter.toLowerCase();
+            var filtered=noteProjects.filter(function(np){
+                if(!filter)return true;
+                var owner=np.ownerId?data.people.find(function(p){return p.id===np.ownerId}):null;
+                var ownerName=np.ownerId==='me'?'Stefano Pascali':(owner?owner.name:'');
+                return np.name.toLowerCase().includes(filter)||(ownerName&&ownerName.toLowerCase().includes(filter))||(np.comments&&np.comments.toLowerCase().includes(filter));
+            });
+            if(!filtered.length){
+                body.innerHTML='<tr><td colspan="5" style="text-align:center;color:var(--text-muted);padding:16px">Nessun progetto nota</td></tr>';
+                return;
+            }
+            body.innerHTML=filtered.map(function(np){
+                var owner=np.ownerId?data.people.find(function(p){return p.id===np.ownerId}):null;
+                var ownerName=np.ownerId==='me'?'Stefano Pascali':(owner?owner.name:'-');
+                var commentsPreview=(np.comments||'').substring(0,100)+(np.comments&&np.comments.length>100?'...':'');
+                return'<tr onclick="openNoteProjectModal(\''+np.id+'\')" style="cursor:pointer"><td>'+escapeHtml(np.name)+'</td><td class="budget-cell">'+formatCurrency(np.budget)+'</td><td style="font-size:.6rem">'+ownerName+'</td><td style="font-size:.6rem;color:var(--text-secondary)">'+escapeHtml(commentsPreview||'-')+'</td><td style="text-align:center"><button class="btn btn-xs btn-secondary" onclick="event.stopPropagation();deleteNoteProjectDirect(\''+np.id+'\')" title="Elimina">🗑️</button></td></tr>';
+            }).join('');
+        }
+        function deleteNoteProjectDirect(id){
+            if(!confirm('Eliminare questo progetto nota?'))return;
+            data.noteProjects=(data.noteProjects||[]).filter(function(np){return np.id!==id});
+            renderLCP();
+            autoSave();
+            showToast('Eliminato');
+        }
         function renderTopics(){var c=document.getElementById('topics-list-panel');if(!data.topics)data.topics=[];var filtered=getFilteredTopics();if(!filtered.length){c.innerHTML='<div style="text-align:center;padding:20px;color:var(--text-muted);font-size:.7rem"><div style="font-size:1.5rem;margin-bottom:8px">🎯</div><div>'+(data.topics.length?'Nessun risultato':'Nessun topic')+'</div></div>';return}var stakesColors={alta:'var(--danger)',media:'var(--warning)',bassa:'var(--success)'};c.innerHTML=filtered.map(function(t){var isActive=currentTopicId===t.id;var modeIcons=(t.isProject?'📁 ':'')+(t.isNegotiation?'🤝 ':'');return'<div class="topic-list-item'+(isActive?' active':'')+'" onclick="openTopicPanel(\''+t.id+'\')"><div class="topic-list-item-title">'+(t.isProject&&t.icon?t.icon+' ':'')+t.title+'</div><div class="topic-list-item-meta"><span class="topic-list-item-status '+(t.status==='closed'?'topic-status-closed':'topic-status-active')+'">'+(t.status==='closed'?'Chiuso':'Attivo')+'</span>'+(modeIcons?'<span>'+modeIcons.trim()+'</span>':'')+(t.isNegotiation?'<span style="color:'+stakesColors[t.stakes||'media']+'">⚡ '+(t.stakes||'media').charAt(0).toUpperCase()+'</span>':'')+(t.counterpart?'<span>'+t.counterpart+'</span>':'')+'</div></div>'}).join('')}
         var currentTopicsView='list';
         function switchTopicsView(view){currentTopicsView=view;document.getElementById('topics-tab-list').classList.toggle('active',view==='list');document.getElementById('topics-tab-timeline').classList.toggle('active',view==='timeline');document.getElementById('topics-list-view').style.display=view==='list'?'grid':'none';document.getElementById('topics-timeline-view').style.display=view==='timeline'?'block':'none';if(view==='timeline')renderTopicsTimeline()}
@@ -1210,7 +1320,7 @@ function adjustColor(hex,amount){var num=parseInt(hex.slice(1),16);var r=Math.mi
         function renderStrategy(){var teamList=document.getElementById('team-objectives-list'),personalList=document.getElementById('personal-objectives-list'),ideasList=document.getElementById('ideas-bucket-list'),progressListEl=document.getElementById('progress-list'),roadmapEl=document.getElementById('roadmap-timeline'),thoughtsList=document.getElementById('thoughts-list'),notesList=document.getElementById('leadership-notes-list');var ideas=(data.ideaBucket||[]).slice().sort(function(a,b){return new Date(b.createdAt)-new Date(a.createdAt)});if(!ideas.length)ideasList.innerHTML='<div class="empty-state"><div class="empty-state-icon">💡</div><p class="empty-state-text">Nessuna idea salvata</p><p style="font-size:.55rem;color:var(--text-muted);margin-top:4px">Seleziona testo nel Journal o Topics e clicca 💡</p></div>';else ideasList.innerHTML=ideas.map(function(i){var sourceIcon=i.sourceType==='journal'?'📓':'🎯';var hasNotes=i.notes&&i.notes.trim();return'<div class="idea-list-item'+(currentIdeaId===i.id?' active':'')+'" onclick="openIdeaPanel(\''+i.id+'\')"><div class="idea-list-item-title">'+i.title+'</div><div class="idea-list-item-meta"><div class="idea-list-item-source">'+sourceIcon+' '+i.sourceName+'</div><div>'+(hasNotes?'📝 ':'')+formatDateFull(i.createdAt)+'</div></div></div>'}).join('');var teamObjs=data.teamObjectives.filter(function(o){return!o.personal}),personalObjs=data.teamObjectives.filter(function(o){return o.personal});if(!teamObjs.length)teamList.innerHTML='<div class="empty-state"><div class="empty-state-icon">🎯</div><p class="empty-state-text">Nessun obiettivo</p></div>';else teamList.innerHTML=teamObjs.map(function(o){var krs=o.subgoals||o.keyResults||[],done=krs.filter(function(k){return k.done}).length,total=krs.length,pct=total?Math.round(done/total*100):0;return'<div class="objective-card"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px"><div style="font-size:.85rem;font-weight:600;cursor:pointer" onclick="openTeamObjectiveModal(\''+o.id+'\')">'+o.title+'</div><button class="btn btn-xs btn-secondary" onclick="deleteObjective(\''+o.id+'\')">🗑️</button></div>'+(o.description?'<div style="font-size:.7rem;color:var(--text-secondary);margin-bottom:8px">'+renderTextWithLinks(o.description)+'</div>':'')+(total?'<div class="progress-bar"><div class="progress-fill" style="width:'+pct+'%"></div></div><div style="font-size:.6rem;color:var(--text-muted);margin:4px 0">'+done+'/'+total+' completati ('+pct+'%)</div>':'')+krs.map(function(k){return'<div class="kr-item"><div class="kr-checkbox'+(k.done?' checked':'')+'" onclick="toggleKR(\''+o.id+'\',\''+k.id+'\')"></div><div style="font-size:.7rem;flex:1;cursor:pointer;'+(k.done?'text-decoration:line-through;color:var(--text-muted)':'')+'" onclick="editKR(\''+o.id+'\',\''+k.id+'\')" title="Clicca per modificare">'+k.text+'</div></div>'}).join('')+'</div>'}).join('');if(!personalObjs.length)personalList.innerHTML='<div class="empty-state"><div class="empty-state-icon">🎯</div><p class="empty-state-text">Nessun obiettivo</p></div>';else personalList.innerHTML=personalObjs.map(function(o){var krs=o.subgoals||o.keyResults||[],done=krs.filter(function(k){return k.done}).length,total=krs.length,pct=total?Math.round(done/total*100):0;return'<div class="objective-card"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px"><div style="font-size:.85rem;font-weight:600;cursor:pointer" onclick="openTeamObjectiveModal(\''+o.id+'\')">'+o.title+'</div><button class="btn btn-xs btn-secondary" onclick="deleteObjective(\''+o.id+'\')">🗑️</button></div>'+(o.description?'<div style="font-size:.7rem;color:var(--text-secondary);margin-bottom:8px">'+renderTextWithLinks(o.description)+'</div>':'')+(total?'<div class="progress-bar"><div class="progress-fill" style="width:'+pct+'%"></div></div><div style="font-size:.6rem;color:var(--text-muted);margin:4px 0">'+done+'/'+total+' completati ('+pct+'%)</div>':'')+krs.map(function(k){return'<div class="kr-item"><div class="kr-checkbox'+(k.done?' checked':'')+'" onclick="toggleKR(\''+o.id+'\',\''+k.id+'\')"></div><div style="font-size:.7rem;flex:1;cursor:pointer;'+(k.done?'text-decoration:line-through;color:var(--text-muted)':'')+'" onclick="editKR(\''+o.id+'\',\''+k.id+'\')" title="Clicca per modificare">'+k.text+'</div></div>'}).join('')+'</div>'}).join('');var progressItems=(data.progressList||[]).slice().sort(function(a,b){return new Date(b.date)-new Date(a.date)});var progressByArea={};progressItems.forEach(function(p){var area=p.area||'Altro';if(!progressByArea[area])progressByArea[area]=[];progressByArea[area].push(p)});if(!progressItems.length)progressListEl.innerHTML='<div class="empty-state"><div class="empty-state-icon">🌱</div><p class="empty-state-text">Nessun progresso annotato</p></div>';else{var progressHtml='';Object.keys(progressByArea).sort().forEach(function(area){progressHtml+='<div class="progress-area-section"><div class="progress-area-title">'+area+' <span class="section-count">'+progressByArea[area].length+'</span></div>';progressHtml+=progressByArea[area].map(function(p){return'<div class="progress-card" onclick="openProgressModal(\''+p.id+'\')"><div class="progress-card-header"><div class="progress-card-date">'+formatDateFull(p.date)+'</div></div><div class="progress-card-content">'+renderTextWithLinks(p.content)+'</div>'+(p.context?'<div class="progress-card-context">📍 '+p.context+'</div>':'')+'</div>'}).join('');progressHtml+='</div>'});progressListEl.innerHTML=progressHtml}var milestones=data.milestones.slice().sort(function(a,b){return new Date(a.date)-new Date(b.date)});if(!milestones.length)roadmapEl.innerHTML='<div class="empty-state"><div class="empty-state-icon">🗺️</div><p class="empty-state-text">Nessuna milestone</p></div>';else roadmapEl.innerHTML=milestones.map(function(m){return'<div class="roadmap-item-section"><div class="roadmap-date">'+formatDateFull(m.date)+'</div><div style="display:flex;justify-content:space-between"><div class="roadmap-item-title" style="cursor:pointer" onclick="openMilestoneModal(\''+m.id+'\')">'+m.title+'</div><button class="btn btn-xs btn-secondary" onclick="deleteMilestone(\''+m.id+'\')">🗑️</button></div>'+(m.description?'<div style="font-size:.7rem;color:var(--text-secondary);margin-top:4px">'+renderTextWithLinks(m.description)+'</div>':'')+'</div>'}).join('');var thoughts=data.thoughts.slice().sort(function(a,b){return new Date(b.createdAt)-new Date(a.createdAt)});if(!thoughts.length)thoughtsList.innerHTML='<div class="empty-state"><div class="empty-state-icon">💭</div><p class="empty-state-text">Nessun pensiero</p></div>';else thoughtsList.innerHTML=thoughts.map(function(t){return'<div class="thought-card"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div class="thought-date">'+formatDateFull(t.createdAt)+'</div><button class="btn btn-xs btn-secondary" onclick="deleteThought(\''+t.id+'\')">🗑️</button></div><div style="font-size:.75rem;line-height:1.5;white-space:pre-wrap;cursor:pointer" onclick="openThoughtModal(\''+t.id+'\')">'+renderTextWithLinks(t.content)+'</div>'+(t.tags&&t.tags.length?'<div class="tags">'+t.tags.map(function(tag){return'<span class="tag">'+tag+'</span>'}).join('')+'</div>':'')+'</div>'}).join('');var notes=data.leadershipNotes.slice().sort(function(a,b){return new Date(b.date)-new Date(a.date)});if(!notes.length)notesList.innerHTML='<div class="empty-state"><div class="empty-state-icon">📝</div><p class="empty-state-text">Nessuna nota</p></div>';else notesList.innerHTML=notes.map(function(n){return'<div class="note-card"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div class="note-date">'+formatDateFull(n.date)+'</div><button class="btn btn-xs btn-secondary" onclick="deleteLeadershipNote(\''+n.id+'\')">🗑️</button></div><div style="font-size:.75rem;line-height:1.5;white-space:pre-wrap;cursor:pointer" onclick="openLeadershipNoteModal(\''+n.id+'\')">'+renderTextWithLinks(n.content)+'</div></div>'}).join('')}
 
         // Init
-        function renderAll(){applyVisibleSections();renderLSWStats();renderWeekTracker();renderHabitsBlocks();renderPeople();renderProjects();renderLCP();renderTopics();renderBooks();renderJournal();renderTasks();renderStrategy();renderAgendaTables()}
+        function renderAll(){applyVisibleSections();renderLSWStats();renderWeekTracker();renderHabitsBlocks();renderPeople();renderProjects();renderLCP();renderTopics();renderBooks();renderJournal();renderTasks();renderStrategy();renderAgendaTables();if(currentPeopleView==='staff'){renderStaffTables();renderStaffNotes()}}
         
         // ============ AGENDA TABLES ============
         function openAgendaTableModal(id){
@@ -1411,6 +1521,252 @@ function adjustColor(hex,amount){var num=parseInt(hex.slice(1),16);var r=Math.mi
                 html+='<span>'+t.cols+'</span>';
                 html+='<button class="btn btn-xs btn-secondary" onclick="addAgendaCol(\''+t.id+'\')">+</button>';
                 html+='</div>';
+                html+='</div>';
+            });
+            container.innerHTML=html;
+        }
+        
+        // ============ STAFF TABLES & NOTES ============
+        function switchPeopleView(view){
+            currentPeopleView=view;
+            document.getElementById('people-tab-people').classList.toggle('active',view==='people');
+            document.getElementById('people-tab-staff').classList.toggle('active',view==='staff');
+            document.getElementById('people-view-people').style.display=view==='people'?'block':'none';
+            document.getElementById('people-view-staff').style.display=view==='staff'?'block':'none';
+            document.getElementById('people-add-btn').style.display=view==='people'?'':'none';
+            if(view==='staff'){renderStaffTables();renderStaffNotes()}
+        }
+        
+        function openStaffTableModal(id){
+            document.getElementById('staff-table-id').value='';
+            document.getElementById('staff-table-name').value='';
+            document.getElementById('staff-table-rows').value='4';
+            document.getElementById('staff-table-cols').value='4';
+            document.getElementById('staff-table-modal-title').textContent='Nuova Tabella Staff';
+            if(id){
+                var t=(data.staffTables||[]).find(function(x){return x.id===id});
+                if(t){
+                    document.getElementById('staff-table-id').value=t.id;
+                    document.getElementById('staff-table-name').value=t.name;
+                    document.getElementById('staff-table-rows').value=t.rows;
+                    document.getElementById('staff-table-cols').value=t.cols;
+                    document.getElementById('staff-table-modal-title').textContent='Modifica Tabella Staff';
+                }
+            }
+            openModal('staff-table-modal');
+        }
+        
+        function saveStaffTable(){
+            var id=document.getElementById('staff-table-id').value;
+            var name=document.getElementById('staff-table-name').value.trim()||'Tabella senza nome';
+            var rows=parseInt(document.getElementById('staff-table-rows').value)||4;
+            var cols=parseInt(document.getElementById('staff-table-cols').value)||4;
+            if(rows<2)rows=2;if(rows>50)rows=50;
+            if(cols<1)cols=1;if(cols>20)cols=20;
+            if(!data.staffTables)data.staffTables=[];
+            if(id){
+                var idx=data.staffTables.findIndex(function(t){return t.id===id});
+                if(idx>=0){
+                    var oldRows=data.staffTables[idx].rows;
+                    var oldCols=data.staffTables[idx].cols;
+                    var oldData=data.staffTables[idx].tableData||[];
+                    var newData=[];
+                    for(var r=0;r<rows;r++){
+                        newData[r]=[];
+                        for(var c=0;c<cols;c++){
+                            newData[r][c]=(oldData[r]&&oldData[r][c])?oldData[r][c]:'';
+                        }
+                    }
+                    data.staffTables[idx].name=name;
+                    data.staffTables[idx].rows=rows;
+                    data.staffTables[idx].cols=cols;
+                    data.staffTables[idx].tableData=newData;
+                }
+            }else{
+                var tableData=[];
+                for(var r=0;r<rows;r++){
+                    tableData[r]=[];
+                    for(var c=0;c<cols;c++)tableData[r][c]='';
+                }
+                data.staffTables.push({id:generateId(),name:name,rows:rows,cols:cols,tableData:tableData});
+            }
+            closeModal('staff-table-modal');
+            renderStaffTables();
+            autoSave();
+            showToast('Tabella salvata');
+        }
+        
+        function deleteStaffTable(id){
+            if(!confirm('Eliminare questa tabella?'))return;
+            data.staffTables=(data.staffTables||[]).filter(function(t){return t.id!==id});
+            renderStaffTables();
+            autoSave();
+            showToast('Tabella eliminata');
+        }
+        
+        function updateStaffTableName(id,name){
+            var t=(data.staffTables||[]).find(function(x){return x.id===id});
+            if(t){t.name=name;autoSave()}
+        }
+        
+        function addStaffRow(tableId){
+            var t=(data.staffTables||[]).find(function(x){return x.id===tableId});
+            if(!t||t.rows>=50)return;
+            t.rows++;
+            t.tableData[t.rows-1]=[];
+            for(var c=0;c<t.cols;c++)t.tableData[t.rows-1][c]='';
+            renderStaffTables();autoSave();
+        }
+        
+        function removeStaffRow(tableId){
+            var t=(data.staffTables||[]).find(function(x){return x.id===tableId});
+            if(!t||t.rows<=2)return;
+            t.rows--;
+            t.tableData.pop();
+            renderStaffTables();autoSave();
+        }
+        
+        function addStaffCol(tableId){
+            var t=(data.staffTables||[]).find(function(x){return x.id===tableId});
+            if(!t||t.cols>=20)return;
+            t.cols++;
+            for(var r=0;r<t.rows;r++)t.tableData[r][t.cols-1]='';
+            renderStaffTables();autoSave();
+        }
+        
+        function removeStaffCol(tableId){
+            var t=(data.staffTables||[]).find(function(x){return x.id===tableId});
+            if(!t||t.cols<=1)return;
+            t.cols--;
+            for(var r=0;r<t.rows;r++)t.tableData[r].pop();
+            renderStaffTables();autoSave();
+        }
+        
+        var staffDebounceTimer=null;
+        function updateStaffCellContentEditable(tableId,row,col,el){
+            var t=(data.staffTables||[]).find(function(x){return x.id===tableId});
+            if(t&&t.tableData&&t.tableData[row]){
+                t.tableData[row][col]=el.innerHTML;
+            }
+            if(staffDebounceTimer)clearTimeout(staffDebounceTimer);
+            staffDebounceTimer=setTimeout(function(){autoSave()},1500);
+        }
+        
+        function renderStaffTables(){
+            var container=document.getElementById('staff-tables-container');
+            if(!container)return;
+            var tables=data.staffTables||[];
+            if(!tables.length){
+                container.innerHTML='<div class="empty-state"><div class="empty-state-icon">📊</div><p class="empty-state-text">Nessuna tabella staff</p><p style="font-size:.65rem;color:var(--text-muted);margin-top:6px">Clicca + per creare una tabella personalizzata</p></div>';
+                return;
+            }
+            var activeEl=document.activeElement;
+            var isEditingStaff=activeEl&&activeEl.dataset&&activeEl.dataset.stafftableid;
+            if(isEditingStaff)return;
+            var html='';
+            tables.forEach(function(t){
+                html+='<div class="agenda-table-card">';
+                html+='<div class="agenda-table-header">';
+                html+='<div class="agenda-table-title">📋 <input type="text" value="'+escapeHtml(t.name)+'" onchange="updateStaffTableName(\''+t.id+'\',this.value)" onclick="this.select()"></div>';
+                html+='<div class="agenda-table-actions">';
+                html+='<button class="btn btn-xs btn-secondary" onclick="openStaffTableModal(\''+t.id+'\')" title="Modifica dimensioni">⚙️</button>';
+                html+='<button class="btn btn-xs btn-secondary" onclick="deleteStaffTable(\''+t.id+'\')" title="Elimina">🗑️</button>';
+                html+='</div></div>';
+                html+='<div style="overflow-x:auto"><table class="agenda-table">';
+                for(var r=0;r<t.rows;r++){
+                    html+='<tr>';
+                    for(var c=0;c<t.cols;c++){
+                        var cellValue=(t.tableData&&t.tableData[r]&&t.tableData[r][c])?t.tableData[r][c]:'';
+                        if(r===0){
+                            html+='<th><input type="text" data-stafftableid="'+t.id+'" data-row="'+r+'" data-col="'+c+'" value="'+escapeHtml(cellValue)+'" placeholder="Titolo '+(c+1)+'" oninput="updateStaffCellDebounced(\''+t.id+'\','+r+','+c+',this.value)"></th>';
+                        }else{
+                            html+='<td><div class="agenda-cell-editor" contenteditable="true" data-stafftableid="'+t.id+'" data-row="'+r+'" data-col="'+c+'" data-placeholder="" oninput="updateStaffCellContentEditable(\''+t.id+'\','+r+','+c+',this)">'+cellValue+'</div></td>';
+                        }
+                    }
+                    html+='</tr>';
+                }
+                html+='</table></div>';
+                html+='<div class="agenda-table-resize">';
+                html+='<span>Righe:</span>';
+                html+='<button class="btn btn-xs btn-secondary" onclick="removeStaffRow(\''+t.id+'\')">−</button>';
+                html+='<span>'+t.rows+'</span>';
+                html+='<button class="btn btn-xs btn-secondary" onclick="addStaffRow(\''+t.id+'\')">+</button>';
+                html+='<span style="margin-left:12px">Colonne:</span>';
+                html+='<button class="btn btn-xs btn-secondary" onclick="removeStaffCol(\''+t.id+'\')">−</button>';
+                html+='<span>'+t.cols+'</span>';
+                html+='<button class="btn btn-xs btn-secondary" onclick="addStaffCol(\''+t.id+'\')">+</button>';
+                html+='</div>';
+                html+='</div>';
+            });
+            container.innerHTML=html;
+        }
+        
+        function updateStaffCellDebounced(tableId,row,col,value){
+            var t=(data.staffTables||[]).find(function(x){return x.id===tableId});
+            if(t&&t.tableData&&t.tableData[row]){
+                t.tableData[row][col]=value;
+            }
+            if(staffDebounceTimer)clearTimeout(staffDebounceTimer);
+            staffDebounceTimer=setTimeout(function(){autoSave()},1500);
+        }
+        
+        // Staff Notes
+        function addStaffNote(){
+            if(!data.staffNotes)data.staffNotes=[];
+            var note={
+                id:generateId(),
+                text:'',
+                createdAt:new Date().toISOString(),
+                updatedAt:new Date().toISOString()
+            };
+            data.staffNotes.unshift(note);
+            renderStaffNotes();
+            autoSave();
+            setTimeout(function(){
+                var editor=document.getElementById('staff-note-'+note.id);
+                if(editor)editor.focus();
+            },100);
+        }
+        
+        function deleteStaffNote(id){
+            if(!confirm('Eliminare questa nota?'))return;
+            data.staffNotes=(data.staffNotes||[]).filter(function(n){return n.id!==id});
+            renderStaffNotes();
+            autoSave();
+            showToast('Nota eliminata');
+        }
+        
+        var staffNoteDebounceTimer=null;
+        function updateStaffNoteContent(id,el){
+            var note=(data.staffNotes||[]).find(function(n){return n.id===id});
+            if(note){
+                note.text=el.innerHTML;
+                note.updatedAt=new Date().toISOString();
+            }
+            if(staffNoteDebounceTimer)clearTimeout(staffNoteDebounceTimer);
+            staffNoteDebounceTimer=setTimeout(function(){autoSave()},1500);
+        }
+        
+        function renderStaffNotes(){
+            var container=document.getElementById('staff-notes-container');
+            if(!container)return;
+            var notes=data.staffNotes||[];
+            if(!notes.length){
+                container.innerHTML='<div class="empty-state"><div class="empty-state-icon">📝</div><p class="empty-state-text">Nessuna nota</p><p style="font-size:.65rem;color:var(--text-muted);margin-top:6px">Clicca + per aggiungere una nota</p></div>';
+                return;
+            }
+            var activeEl=document.activeElement;
+            var isEditingNote=activeEl&&activeEl.id&&activeEl.id.indexOf('staff-note-')===0;
+            if(isEditingNote)return;
+            var html='';
+            notes.forEach(function(note){
+                var dateStr=note.updatedAt?formatDateFull(new Date(note.updatedAt)):formatDateFull(new Date(note.createdAt));
+                html+='<div class="thought-card" style="border-left-color:var(--accent-people)">';
+                html+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">';
+                html+='<div class="thought-date" style="color:var(--accent-people)">'+dateStr+'</div>';
+                html+='<button class="btn btn-xs btn-secondary" onclick="deleteStaffNote(\''+note.id+'\')" title="Elimina">🗑️</button>';
+                html+='</div>';
+                html+='<div id="staff-note-'+note.id+'" class="agenda-cell-editor" contenteditable="true" style="min-height:60px;padding:8px;background:var(--bg-tertiary);border-radius:var(--radius-sm)" data-placeholder="Scrivi qui la nota..." oninput="updateStaffNoteContent(\''+note.id+'\',this)">'+(note.text||'')+'</div>';
                 html+='</div>';
             });
             container.innerHTML=html;
