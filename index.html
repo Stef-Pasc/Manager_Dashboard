@@ -124,6 +124,21 @@
         .mobile-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--bg-secondary);border-top:1px solid var(--border);z-index:200;padding:8px 0;padding-bottom:env(safe-area-inset-bottom)}.mobile-nav-items{display:flex;justify-content:space-around;align-items:center}.mobile-nav-item{display:flex;flex-direction:column;align-items:center;padding:6px 10px;color:var(--text-muted);text-decoration:none;font-size:.55rem;border-radius:var(--radius-sm);transition:all .2s;cursor:pointer}.mobile-nav-item.active{color:var(--accent-habits)}.mobile-nav-item span{font-size:1.1rem;margin-bottom:2px}.mobile-menu-btn{display:none;position:fixed;top:10px;left:10px;z-index:201;width:36px;height:36px;border:1px solid var(--border);background:var(--bg-secondary);border-radius:var(--radius-sm);font-size:1.1rem;cursor:pointer}
         .mobile-header{display:none;position:fixed;top:0;left:0;right:0;height:50px;background:var(--bg-secondary);border-bottom:1px solid var(--border);z-index:200;padding:0 10px;padding-top:env(safe-area-inset-top)}.mobile-header-content{display:flex;justify-content:space-between;align-items:center;height:50px}.mobile-header-left{display:flex;align-items:center;gap:10px}.mobile-header-title{font-size:.85rem;font-weight:700;color:var(--text-primary)}.mobile-header-right{display:flex;align-items:center;gap:6px}.mobile-header-btn{width:32px;height:32px;border:1px solid var(--border);background:var(--bg-tertiary);border-radius:var(--radius-sm);font-size:.85rem;cursor:pointer;display:flex;align-items:center;justify-content:center}.mobile-header-btn:hover{background:var(--bg-elevated)}
         .mode-switch{display:flex;align-items:center;gap:6px;padding:6px 10px;background:var(--bg-tertiary);border-radius:var(--radius-md);margin:10px 12px}.mode-switch-label{font-size:.6rem;color:var(--text-muted)}.mode-switch-btn{padding:4px 10px;border:none;background:transparent;border-radius:var(--radius-sm);font-size:.65rem;font-weight:600;cursor:pointer;transition:all .2s;color:var(--text-muted)}.mode-switch-btn.active{background:var(--accent-habits);color:#fff}
+        /* Networking CRM Styles */
+        .networking-filters{display:flex;gap:12px;align-items:center;margin-bottom:14px;flex-wrap:wrap}.networking-search{flex:1;min-width:200px}.networking-search input{width:100%}.networking-filter-chips{display:flex;gap:6px;flex-wrap:wrap}.networking-chip{padding:5px 12px;border-radius:20px;border:1px solid var(--border);background:var(--bg-secondary);font-size:.65rem;cursor:pointer;transition:all .2s;font-family:inherit}.networking-chip:hover{border-color:#ec4899;background:rgba(236,72,153,.1)}.networking-chip.active{background:#ec4899;color:#fff;border-color:#ec4899}
+        .networking-container{display:grid;grid-template-columns:320px 1fr;gap:14px;min-height:500px}.networking-list-panel{background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-lg);padding:12px;overflow-y:auto;max-height:calc(100vh - 200px)}.networking-detail-panel{background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px;overflow-y:auto;max-height:calc(100vh - 200px)}
+        .networking-empty-detail{display:flex;flex-direction:column;align-items:center;justify-content:center;height:200px;color:var(--text-muted);text-align:center}.networking-empty-detail .empty-state-icon{font-size:2.5rem;margin-bottom:10px;opacity:.5}
+        .contact-card{padding:10px 12px;background:var(--bg-tertiary);border:1px solid var(--border);border-radius:var(--radius-md);margin-bottom:8px;cursor:pointer;transition:all .2s;border-left:3px solid transparent}.contact-card:hover{border-color:#ec4899;transform:translateX(3px)}.contact-card.active{border-left-color:#ec4899;background:rgba(236,72,153,.08)}.contact-card.existing{border-left-color:#10b981}.contact-card.potential{border-left-color:#f59e0b}.contact-card.followup{border-left-color:#ef4444}
+        .contact-card-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px}.contact-card-name{font-size:.8rem;font-weight:600;color:var(--text-primary)}.contact-card-type{font-size:.55rem;padding:2px 6px;border-radius:10px}.contact-card-type.existing{background:rgba(16,185,129,.15);color:#10b981}.contact-card-type.potential{background:rgba(245,158,11,.15);color:#f59e0b}
+        .contact-card-company{font-size:.7rem;color:var(--text-secondary);margin-bottom:3px}.contact-card-meta{display:flex;gap:8px;font-size:.6rem;color:var(--text-muted)}.contact-card-followup{display:flex;align-items:center;gap:4px;margin-top:6px;font-size:.6rem;padding:3px 6px;background:rgba(239,68,68,.1);border-radius:4px;color:#ef4444}
+        .contact-detail-header{display:flex;align-items:center;gap:14px;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--border)}.contact-avatar{width:60px;height:60px;border-radius:14px;background:linear-gradient(135deg,#ec4899,#8b5cf6);display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:#fff;font-weight:700}.contact-detail-info{flex:1}.contact-detail-name{font-size:1.1rem;font-weight:700;margin-bottom:2px;cursor:pointer}.contact-detail-name:hover{color:#ec4899}.contact-detail-company{font-size:.85rem;color:var(--text-secondary)}.contact-detail-role{font-size:.75rem;color:var(--text-muted)}
+        .contact-detail-section{background:var(--bg-tertiary);border:1px solid var(--border);border-radius:var(--radius-md);padding:12px;margin-bottom:12px}.contact-detail-section-title{font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
+        .contact-info-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.contact-info-item{display:flex;flex-direction:column;gap:2px}.contact-info-label{font-size:.55rem;color:var(--text-muted);text-transform:uppercase}.contact-info-value{font-size:.75rem;color:var(--text-primary)}.contact-info-value a{color:#ec4899;text-decoration:none}.contact-info-value a:hover{text-decoration:underline}
+        .contact-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}.contact-tag{font-size:.55rem;padding:2px 8px;border-radius:12px;background:rgba(236,72,153,.1);color:#ec4899;border:1px solid rgba(236,72,153,.3)}
+        .contact-status-badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.contact-status-badge{font-size:.6rem;padding:3px 8px;border-radius:6px;display:flex;align-items:center;gap:4px}.contact-status-badge.priority-high{background:rgba(239,68,68,.15);color:#ef4444}.contact-status-badge.priority-medium{background:rgba(245,158,11,.15);color:#f59e0b}.contact-status-badge.priority-low{background:rgba(107,114,128,.15);color:#6b7280}
+        .interaction-card{padding:10px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:8px;border-left:3px solid #ec4899}.interaction-card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}.interaction-card-date{font-size:.6rem;color:#ec4899;font-family:'JetBrains Mono',monospace;font-weight:600}.interaction-card-type{font-size:.55rem;padding:2px 6px;border-radius:8px;background:var(--bg-tertiary)}.interaction-card-notes{font-size:.7rem;line-height:1.5;color:var(--text-primary);margin-bottom:4px}.interaction-card-outcome{font-size:.65rem;color:var(--text-secondary);font-style:italic;padding-top:6px;border-top:1px dashed var(--border)}
+        .contact-notes-editor{min-height:80px;padding:10px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-sm);font-size:.75rem;line-height:1.6}
+        .followup-scheduler{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.followup-scheduler input[type="date"]{flex:1;min-width:140px}.followup-scheduler select{min-width:100px}
         @media(max-width:768px){
             .sidebar{position:fixed;left:-280px;top:0;height:100vh;z-index:250;transition:left .3s;box-shadow:var(--shadow-lg);width:280px}.sidebar.open{left:0}.sidebar-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:240}.sidebar-overlay.visible{display:block}
             .main{margin-left:0!important;padding:60px 12px 90px 12px!important;width:100%!important}
@@ -135,6 +150,7 @@
             .books-container{grid-template-columns:1fr;height:auto;gap:12px}.books-list-panel{max-height:200px;padding:10px}.books-detail-panel{min-height:auto;padding:12px}
             .ideas-container{grid-template-columns:1fr;height:auto;gap:12px}.ideas-list-panel{max-height:200px;padding:10px}.ideas-detail-panel{min-height:auto;padding:12px}
             .projects-all-container{grid-template-columns:1fr;height:auto;gap:12px}.projects-list-panel{max-height:250px;padding:10px}.projects-detail-panel{min-height:auto;padding:12px}
+            .networking-container{grid-template-columns:1fr;height:auto;gap:12px}.networking-list-panel{max-height:300px;padding:10px}.networking-detail-panel{min-height:auto;padding:12px}
             .lsw-view{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -12px;padding:0 12px}.lsw-week-grid{min-width:600px}.lsw-daily-detail{min-width:auto}
             .modal-content{width:95%!important;max-width:none!important;margin:10px!important;max-height:85vh}.modal-body{max-height:55vh;overflow-y:auto}
             .detail-panel{width:100%;right:-100%}.detail-panel.open{right:0}
@@ -210,6 +226,7 @@
                 <div class="nav-item" data-section="journal" onclick="switchSection('journal')"><span class="nav-icon">📔</span>Journal</div>
                 <div class="nav-item" data-section="agenda" onclick="switchSection('agenda')"><span class="nav-icon">📅</span>Agenda</div>
                 <div class="nav-item" data-section="strategy" onclick="switchSection('strategy')"><span class="nav-icon">📊</span>Strategy</div>
+                <div class="nav-item" data-section="networking" onclick="switchSection('networking')"><span class="nav-icon">🤝</span>Networking</div>
             </nav>
             <div class="sidebar-footer">
                 <div style="display:flex;justify-content:center;margin-bottom:8px"><button class="btn-icon-only" onclick="openSettingsModal()" title="Impostazioni sezioni">⚙️</button></div>
@@ -416,6 +433,26 @@
                 <div class="page-header"><h1 class="page-title" data-accent="habits">Agenda</h1><button class="btn btn-primary btn-add" onclick="openAgendaTableModal()">+</button></div>
                 <div id="agenda-tables-container"></div>
             </div>
+            <div id="page-networking" class="page">
+                <div class="page-header"><h1 class="page-title" style="color:#ec4899">🤝 Networking CRM</h1><button class="btn btn-primary btn-add" onclick="openContactModal()">+</button></div>
+                <div class="networking-filters">
+                    <div class="networking-search">
+                        <input type="text" id="networking-search-input" class="form-input" placeholder="Cerca contatti..." oninput="filterNetworking()">
+                    </div>
+                    <div class="networking-filter-chips">
+                        <button class="networking-chip active" data-filter="all" onclick="setNetworkingFilter('all',this)">Tutti</button>
+                        <button class="networking-chip" data-filter="existing" onclick="setNetworkingFilter('existing',this)">🟢 Esistenti</button>
+                        <button class="networking-chip" data-filter="potential" onclick="setNetworkingFilter('potential',this)">🟡 Potenziali</button>
+                        <button class="networking-chip" data-filter="followup" onclick="setNetworkingFilter('followup',this)">⏰ Da ricontattare</button>
+                    </div>
+                </div>
+                <div class="networking-container">
+                    <div class="networking-list-panel" id="networking-list-panel"></div>
+                    <div class="networking-detail-panel" id="networking-detail-panel">
+                        <div class="networking-empty-detail"><div class="empty-state-icon">🤝</div><p>Seleziona un contatto dalla lista</p><p style="font-size:.65rem;color:var(--text-muted);margin-top:8px">Gestisci i tuoi contatti professionali e pianifica i follow-up</p></div>
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
     <div class="panel-overlay" onclick="closePanel()"></div>
@@ -458,6 +495,12 @@
 
     <div id="topic-step-modal" class="modal"><div class="modal-content" style="max-width:400px"><div class="modal-header"><h3 class="modal-title">Modifica Step</h3><button class="panel-close" onclick="closeModal('topic-step-modal')">×</button></div><div class="modal-body"><input type="hidden" id="step-topic-id"><input type="hidden" id="step-id"><div class="form-group"><label class="form-label">Nome Step</label><input type="text" id="step-name" class="form-input"></div><div class="form-group"><label class="form-label">Assegnato a</label><select id="step-assignee" class="form-select"><option value="">Nessuno</option></select></div><div class="form-row"><div class="form-group"><label class="form-label">Data Inizio</label><input type="date" id="step-start" class="form-input"></div><div class="form-group"><label class="form-label">Data Fine</label><input type="date" id="step-end" class="form-input"></div></div><div class="form-group"><label class="form-label">Completato</label><label class="toggle-switch"><input type="checkbox" id="step-completed"><span class="toggle-slider"></span></label></div></div><div class="modal-footer"><button type="button" class="btn btn-danger btn-sm" onclick="deleteTopicStepFromModal()" style="margin-right:auto">Elimina</button><button type="button" class="btn btn-secondary" onclick="closeModal('topic-step-modal')">Annulla</button><button type="button" class="btn btn-primary" onclick="saveTopicStepFromModal()">Salva</button></div></div></div>
     <div id="book-modal" class="modal"><div class="modal-content" style="max-width:500px"><div class="modal-header"><h3 class="modal-title" id="book-modal-title">Nuovo Libro</h3><button class="panel-close" onclick="closeModal('book-modal')">×</button></div><div class="modal-body"><input type="hidden" id="book-id"><div class="form-group"><label class="form-label">Titolo</label><input type="text" id="book-title" class="form-input" placeholder="Titolo del libro"></div><div class="form-group"><label class="form-label">Autore</label><input type="text" id="book-author" class="form-input" placeholder="Autore"></div><div class="form-group"><label class="form-label">Descrizione</label><textarea id="book-description" class="form-textarea" style="min-height:60px" placeholder="Breve descrizione o motivo per leggerlo"></textarea></div><div class="form-row"><div class="form-group"><label class="form-label">Stato</label><select id="book-status" class="form-select"><option value="to-read">Da leggere</option><option value="reading">In lettura</option><option value="completed">Completato</option><option value="abandoned">Abbandonato</option></select></div><div class="form-group"><label class="form-label">Valutazione</label><select id="book-rating" class="form-select"><option value="">-</option><option value="5">⭐⭐⭐⭐⭐</option><option value="4">⭐⭐⭐⭐</option><option value="3">⭐⭐⭐</option><option value="2">⭐⭐</option><option value="1">⭐</option></select></div></div></div><div class="modal-footer"><button class="btn btn-danger btn-sm" id="book-delete-btn" onclick="deleteBook()" style="margin-right:auto;display:none">Elimina</button><button class="btn btn-secondary" onclick="closeModal('book-modal')">Annulla</button><button class="btn btn-primary" onclick="saveBook()">Salva</button></div></div></div>
+
+    <!-- Contact Modal -->
+    <div id="contact-modal" class="modal"><div class="modal-content" style="max-width:550px"><div class="modal-header"><h3 class="modal-title" id="contact-modal-title">Nuovo Contatto</h3><button class="panel-close" onclick="closeModal('contact-modal')">×</button></div><div class="modal-body"><input type="hidden" id="contact-id"><div class="form-row"><div class="form-group"><label class="form-label">Nome *</label><input type="text" id="contact-name" class="form-input" placeholder="Nome e Cognome"></div><div class="form-group"><label class="form-label">Tipo</label><select id="contact-type" class="form-select"><option value="existing">🟢 Esistente</option><option value="potential">🟡 Potenziale</option></select></div></div><div class="form-row"><div class="form-group"><label class="form-label">Azienda</label><input type="text" id="contact-company" class="form-input" placeholder="Nome azienda"></div><div class="form-group"><label class="form-label">Ruolo</label><input type="text" id="contact-role" class="form-input" placeholder="Posizione/Ruolo"></div></div><div class="form-row"><div class="form-group"><label class="form-label">Email</label><input type="email" id="contact-email" class="form-input" placeholder="email@esempio.com"></div><div class="form-group"><label class="form-label">Telefono</label><input type="tel" id="contact-phone" class="form-input" placeholder="+39 123 456 7890"></div></div><div class="form-group"><label class="form-label">LinkedIn</label><input type="url" id="contact-linkedin" class="form-input" placeholder="https://linkedin.com/in/..."></div><div class="form-row"><div class="form-group"><label class="form-label">Priorità</label><select id="contact-priority" class="form-select"><option value="high">🔴 Alta</option><option value="medium">🟡 Media</option><option value="low">🟢 Bassa</option></select></div><div class="form-group"><label class="form-label">Stato Relazione</label><select id="contact-status" class="form-select"><option value="active">Attivo</option><option value="nurturing">In coltivazione</option><option value="dormant">Dormiente</option></select></div></div><div class="form-group"><label class="form-label">Prossimo Contatto</label><input type="date" id="contact-next-contact" class="form-input"></div><div class="form-group"><label class="form-label">Tags (separati da virgola)</label><input type="text" id="contact-tags" class="form-input" placeholder="es: tech, investor, mentor"></div><div class="form-group"><label class="form-label">Note</label><textarea id="contact-notes" class="form-textarea" style="min-height:60px" placeholder="Note generali sul contatto..."></textarea></div></div><div class="modal-footer"><button class="btn btn-danger btn-sm" id="contact-delete-btn" onclick="deleteContact()" style="margin-right:auto;display:none">Elimina</button><button class="btn btn-secondary" onclick="closeModal('contact-modal')">Annulla</button><button class="btn btn-primary" onclick="saveContact()">Salva</button></div></div></div>
+
+    <!-- Interaction Modal -->
+    <div id="interaction-modal" class="modal"><div class="modal-content" style="max-width:450px"><div class="modal-header"><h3 class="modal-title" id="interaction-modal-title">Nuova Interazione</h3><button class="panel-close" onclick="closeModal('interaction-modal')">×</button></div><div class="modal-body"><input type="hidden" id="interaction-id"><input type="hidden" id="interaction-contact-id"><div class="form-row"><div class="form-group"><label class="form-label">Data</label><input type="date" id="interaction-date" class="form-input"></div><div class="form-group"><label class="form-label">Tipo</label><select id="interaction-type" class="form-select"><option value="call">📞 Chiamata</option><option value="email">📧 Email</option><option value="meeting">🤝 Meeting</option><option value="linkedin">💼 LinkedIn</option><option value="event">🎉 Evento</option><option value="other">📝 Altro</option></select></div></div><div class="form-group"><label class="form-label">Note</label><textarea id="interaction-notes" class="form-textarea" style="min-height:80px" placeholder="Cosa avete discusso? Punti chiave..."></textarea></div><div class="form-group"><label class="form-label">Outcome / Prossimi Passi</label><textarea id="interaction-outcome" class="form-textarea" style="min-height:50px" placeholder="Risultato e azioni da seguire..."></textarea></div></div><div class="modal-footer"><button class="btn btn-danger btn-sm" id="interaction-delete-btn" onclick="deleteInteraction()" style="margin-right:auto;display:none">Elimina</button><button class="btn btn-secondary" onclick="closeModal('interaction-modal')">Annulla</button><button class="btn btn-primary" onclick="saveInteraction()">Salva</button></div></div></div>
 
 
     <div id="team-objective-modal" class="modal"><div class="modal-content"><div class="modal-header"><h3 class="modal-title" id="team-objective-modal-title">Nuovo obiettivo</h3><button class="panel-close" onclick="closeModal('team-objective-modal')">×</button></div><div class="modal-body"><input type="hidden" id="tobjective-id"><input type="hidden" id="tobjective-type" value="team"><div class="form-group"><label class="form-label">Obiettivo</label><input type="text" id="tobjective-title" class="form-input"></div><div class="form-group"><label class="form-label">Descrizione <button class="attach-btn" onclick="triggerFileAttach('tobjective-description')" title="Allega file" style="float:right;width:20px;height:20px;font-size:.6rem">📎</button></label><textarea id="tobjective-description" class="form-textarea"></textarea></div><div class="form-group"><label class="form-label">Sub-goals / Steps</label><div id="tobjective-subgoals-list" style="margin-bottom:6px"></div><div style="display:flex;gap:4px"><input type="text" id="tobjective-new-subgoal" class="form-input" placeholder="Aggiungi sub-goal..." style="flex:1" onkeydown="if(event.key==='Enter'){event.preventDefault();event.stopPropagation();addObjectiveSubgoal();return false}"><button type="button" class="btn btn-primary btn-sm" onclick="addObjectiveSubgoal()">+</button></div></div></div><div class="modal-footer"><button type="button" class="btn btn-secondary" onclick="closeModal('team-objective-modal')">Annulla</button><button type="button" class="btn btn-primary" onclick="saveTeamObjective()">Salva</button></div></div></div>
@@ -730,7 +773,7 @@
         // ============ FINE FIREBASE ============
 
         var currentDataMode = localStorage.getItem('dataMode') || 'pro';
-        var STORAGE_KEY='manager-dashboard-v7-'+currentDataMode,fileHandle=null,data={people:[],projects:[],tasks:[],teamObjectives:[],milestones:[],thoughts:[],leadershipNotes:[],progressList:[],habits:[],habitCompletions:{},habitComments:{},habitOverrides:{},dayComments:{},weeklyObjectives:{},resourceAssessments:[],cirs:[],topics:[],books:[],specialDayRanges:[],journalEntries:{},ideaBucket:[],agendaTables:[],noteProjects:[],staffTables:[],staffNotes:[]},currentPersonId=null,currentProjectId=null,currentBookId=null,currentDay=new Date(),zoomWeeks=1,timelineZoom=1,tempProjectSteps=[],tempTopicSteps=[],tempRAProjects=[],tempCIRPOs=[],tempObjectiveSubgoals=[],draggedProjectId=null,highlightedDateKey=null,currentPeopleFilter='report',showExtraYears=false,lcpSearchFilter='',currentTopicId=null,currentIdeaId=null,topicsTimelineZoom=2,topicsSearchFilter='',topicsTypeFilter='all',topicsCategoryFilter='all',topicsLabelWidth=180,journalViewDate=new Date(),journalSelectedDate=new Date(),currentAttachTarget=null,currentPeopleView='people';
+        var STORAGE_KEY='manager-dashboard-v7-'+currentDataMode,fileHandle=null,data={people:[],projects:[],tasks:[],teamObjectives:[],milestones:[],thoughts:[],leadershipNotes:[],progressList:[],habits:[],habitCompletions:{},habitComments:{},habitOverrides:{},dayComments:{},weeklyObjectives:{},resourceAssessments:[],cirs:[],topics:[],books:[],specialDayRanges:[],journalEntries:{},ideaBucket:[],agendaTables:[],noteProjects:[],staffTables:[],staffNotes:[],networking:[]},currentPersonId=null,currentProjectId=null,currentBookId=null,currentDay=new Date(),zoomWeeks=1,timelineZoom=1,tempProjectSteps=[],tempTopicSteps=[],tempRAProjects=[],tempCIRPOs=[],tempObjectiveSubgoals=[],draggedProjectId=null,highlightedDateKey=null,currentPeopleFilter='report',showExtraYears=false,lcpSearchFilter='',currentTopicId=null,currentIdeaId=null,topicsTimelineZoom=2,topicsSearchFilter='',topicsTypeFilter='all',topicsCategoryFilter='all',topicsLabelWidth=180,journalViewDate=new Date(),journalSelectedDate=new Date(),currentAttachTarget=null,currentPeopleView='people';
         
         function switchDataMode(mode) {
             if (mode === currentDataMode) return;
@@ -767,7 +810,8 @@
                 topics:[],
                 specialDayRanges:[],
                 journalEntries:{},
-                settings:{}
+                settings:{},
+                networking:[]
             };
             
             // Aggiorna UI switch
@@ -796,7 +840,7 @@
                     if (doc.exists && doc.data().data) {
                         var loaded = JSON.parse(doc.data().data);
                         // Reset di nuovo prima di caricare da Firebase
-                        data = {people:[],projects:[],tasks:[],teamObjectives:[],milestones:[],thoughts:[],leadershipNotes:[],progressList:[],habits:[],habitCompletions:{},habitComments:{},habitOverrides:{},dayComments:{},weeklyObjectives:{},resourceAssessments:[],cirs:[],topics:[],specialDayRanges:[],journalEntries:{},settings:{},agendaTables:[],noteProjects:[],staffTables:[],staffNotes:[]};
+                        data = {people:[],projects:[],tasks:[],teamObjectives:[],milestones:[],thoughts:[],leadershipNotes:[],progressList:[],habits:[],habitCompletions:{},habitComments:{},habitOverrides:{},dayComments:{},weeklyObjectives:{},resourceAssessments:[],cirs:[],topics:[],specialDayRanges:[],journalEntries:{},settings:{},agendaTables:[],noteProjects:[],staffTables:[],staffNotes:[],networking:[]};
                         Object.keys(loaded).forEach(function(k) {
                             if (data.hasOwnProperty(k)) data[k] = loaded[k];
                         });
@@ -830,7 +874,7 @@
         var PEOPLE_COLORS=['#f97316','#3b82f6','#10b981','#8b5cf6','#ec4899','#14b8a6','#f59e0b','#ef4444','#6366f1','#84cc16'];
         var PROJECT_COLORS=['#3b82f6','#8b5cf6','#10b981','#f97316','#ef4444','#ec4899','#14b8a6','#f59e0b','#6366f1','#84cc16'];
         var CATEGORIES={compliance:{name:'Compliance-CQP',icon:'📋'},obsolescenza:{name:'Obsolescenza',icon:'⚙️'},improvement:{name:'Improvement/Business',icon:'📈'},newproducts:{name:'New Products',icon:'🆕'}};
-        var SECTIONS={operations:{name:'Tasks',icon:'⚡'},habits:{name:'LSW',icon:'📋'},people:{name:'People',icon:'👥'},projects:{name:'Projects',icon:'📁'},lcp:{name:'LCP',icon:'💰'},topics:{name:'Topics',icon:'🎯'},books:{name:'Libri',icon:'📚'},journal:{name:'Journal',icon:'📔'},agenda:{name:'Agenda',icon:'📅'},strategy:{name:'Strategy',icon:'📊'}};
+        var SECTIONS={operations:{name:'Tasks',icon:'⚡'},habits:{name:'LSW',icon:'📋'},people:{name:'People',icon:'👥'},projects:{name:'Projects',icon:'📁'},lcp:{name:'LCP',icon:'💰'},topics:{name:'Topics',icon:'🎯'},books:{name:'Libri',icon:'📚'},journal:{name:'Journal',icon:'📔'},agenda:{name:'Agenda',icon:'📅'},strategy:{name:'Strategy',icon:'📊'},networking:{name:'Networking',icon:'🤝'}};
         function getVisibleSections(){if(!data.settings)data.settings={};if(!data.settings.visibleSections)data.settings.visibleSections=Object.keys(SECTIONS);if(!data.settings.knownSections)data.settings.knownSections=[];Object.keys(SECTIONS).forEach(function(key){if(!data.settings.knownSections.includes(key)){data.settings.knownSections.push(key);if(!data.settings.visibleSections.includes(key)){data.settings.visibleSections.push(key)}}});return data.settings.visibleSections}
         function openSettingsModal(){var list=document.getElementById('settings-sections-list'),visible=getVisibleSections();list.innerHTML=Object.keys(SECTIONS).map(function(key){var s=SECTIONS[key],isVisible=visible.includes(key);return'<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 10px;background:var(--bg-tertiary);border-radius:var(--radius-sm);margin-bottom:6px"><div style="display:flex;align-items:center;gap:8px"><span style="font-size:1rem">'+s.icon+'</span><span style="font-size:.75rem;font-weight:500">'+s.name+'</span></div><label class="toggle-switch"><input type="checkbox" '+(isVisible?'checked':'')+' onchange="toggleSection(\''+key+'\',this.checked)"><span class="toggle-slider"></span></label></div>'}).join('');openModal('settings-modal')}
         function toggleSection(key,visible){if(!data.settings)data.settings={};if(!data.settings.visibleSections)data.settings.visibleSections=Object.keys(SECTIONS);if(visible){if(!data.settings.visibleSections.includes(key))data.settings.visibleSections.push(key)}else{data.settings.visibleSections=data.settings.visibleSections.filter(function(s){return s!==key})}applyVisibleSections();autoSave()}
@@ -858,7 +902,7 @@
         function downloadJson(){var json=JSON.stringify(data,null,2),blob=new Blob([json],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='manager-dashboard.json';a.click();URL.revokeObjectURL(url);showToast('File scaricato')}
         function loadDataFromFile(e){var file=e.target.files[0];if(!file)return;var reader=new FileReader();reader.onload=function(ev){try{var loaded=JSON.parse(ev.target.result);Object.keys(loaded).forEach(function(k){if(data.hasOwnProperty(k))data[k]=loaded[k]});migrateSpecialDays();renderAll();autoSave();showToast('Caricato')}catch(err){showToast('Errore','error')}};reader.readAsText(file);e.target.value=''}
         function mergeDataFiles(e){var files=e.target.files;if(!files||files.length<2){showToast('Seleziona due file JSON','error');e.target.value='';return}var file1=files[0],file2=files[1];var reader1=new FileReader(),reader2=new FileReader();var data1=null,data2=null;reader1.onload=function(ev){try{data1=JSON.parse(ev.target.result);if(data2)performMerge(data1,data2)}catch(err){showToast('Errore lettura file 1','error')}};reader2.onload=function(ev){try{data2=JSON.parse(ev.target.result);if(data1)performMerge(data1,data2)}catch(err){showToast('Errore lettura file 2','error')}};reader1.readAsText(file1);reader2.readAsText(file2);e.target.value=''}
-        function performMerge(d1,d2){var arrayKeys=['people','projects','tasks','teamObjectives','milestones','thoughts','leadershipNotes','progressList','habits','resourceAssessments','cirs','topics','specialDayRanges','books','agendaTables','ideaBucket','noteProjects','staffTables','staffNotes'];var objectKeys=['habitCompletions','habitComments','habitOverrides','dayComments','weeklyObjectives','journalEntries'];var merged={};arrayKeys.forEach(function(k){var arr1=d1[k]||[],arr2=d2[k]||[];var byId={};arr1.forEach(function(item){if(item.id)byId[item.id]=item});arr2.forEach(function(item){if(item.id){var existing=byId[item.id];if(existing){var t1=getItemTimestamp(existing),t2=getItemTimestamp(item);if(t2>t1)byId[item.id]=item}else{byId[item.id]=item}}});merged[k]=Object.values(byId)});objectKeys.forEach(function(k){var obj1=d1[k]||{},obj2=d2[k]||{};merged[k]=Object.assign({},obj1,obj2);Object.keys(obj1).forEach(function(key){if(obj2.hasOwnProperty(key)){var v1=obj1[key],v2=obj2[key];if(typeof v1==='object'&&v1&&v1.updatedAt&&typeof v2==='object'&&v2&&v2.updatedAt){merged[k][key]=new Date(v1.updatedAt)>new Date(v2.updatedAt)?v1:v2}else if(typeof v2==='object'&&v2&&v2.updatedAt){merged[k][key]=v2}else if(typeof v1==='object'&&v1&&v1.updatedAt){merged[k][key]=v1}}})});Object.keys(merged).forEach(function(k){if(data.hasOwnProperty(k))data[k]=merged[k]});migrateSpecialDays();renderAll();autoSave();var totalItems=arrayKeys.reduce(function(sum,k){return sum+(merged[k]||[]).length},0);showToast('Unione completata! '+totalItems+' elementi')}
+        function performMerge(d1,d2){var arrayKeys=['people','projects','tasks','teamObjectives','milestones','thoughts','leadershipNotes','progressList','habits','resourceAssessments','cirs','topics','specialDayRanges','books','agendaTables','ideaBucket','noteProjects','staffTables','staffNotes','networking'];var objectKeys=['habitCompletions','habitComments','habitOverrides','dayComments','weeklyObjectives','journalEntries'];var merged={};arrayKeys.forEach(function(k){var arr1=d1[k]||[],arr2=d2[k]||[];var byId={};arr1.forEach(function(item){if(item.id)byId[item.id]=item});arr2.forEach(function(item){if(item.id){var existing=byId[item.id];if(existing){var t1=getItemTimestamp(existing),t2=getItemTimestamp(item);if(t2>t1)byId[item.id]=item}else{byId[item.id]=item}}});merged[k]=Object.values(byId)});objectKeys.forEach(function(k){var obj1=d1[k]||{},obj2=d2[k]||{};merged[k]=Object.assign({},obj1,obj2);Object.keys(obj1).forEach(function(key){if(obj2.hasOwnProperty(key)){var v1=obj1[key],v2=obj2[key];if(typeof v1==='object'&&v1&&v1.updatedAt&&typeof v2==='object'&&v2&&v2.updatedAt){merged[k][key]=new Date(v1.updatedAt)>new Date(v2.updatedAt)?v1:v2}else if(typeof v2==='object'&&v2&&v2.updatedAt){merged[k][key]=v2}else if(typeof v1==='object'&&v1&&v1.updatedAt){merged[k][key]=v1}}})});Object.keys(merged).forEach(function(k){if(data.hasOwnProperty(k))data[k]=merged[k]});migrateSpecialDays();renderAll();autoSave();var totalItems=arrayKeys.reduce(function(sum,k){return sum+(merged[k]||[]).length},0);showToast('Unione completata! '+totalItems+' elementi')}
         function getItemTimestamp(item){if(!item)return 0;var ts=item.updatedAt||item.createdAt||item.date||'';return ts?new Date(ts).getTime():0}
         function switchSection(s){document.querySelectorAll('.nav-item').forEach(function(i){i.classList.remove('active')});document.querySelector('.nav-item[data-section="'+s+'"]').classList.add('active');document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active')});document.getElementById('page-'+s).classList.add('active');updateMobileNavBySection(s);closeMobileSidebar();window.scrollTo(0,0)}
         function toggleMobileSidebar(){document.getElementById('sidebar').classList.toggle('open');document.querySelector('.sidebar-overlay').classList.toggle('visible')}
@@ -1320,7 +1364,428 @@ function adjustColor(hex,amount){var num=parseInt(hex.slice(1),16);var r=Math.mi
         function renderStrategy(){var teamList=document.getElementById('team-objectives-list'),personalList=document.getElementById('personal-objectives-list'),ideasList=document.getElementById('ideas-bucket-list'),progressListEl=document.getElementById('progress-list'),roadmapEl=document.getElementById('roadmap-timeline'),thoughtsList=document.getElementById('thoughts-list'),notesList=document.getElementById('leadership-notes-list');var ideas=(data.ideaBucket||[]).slice().sort(function(a,b){return new Date(b.createdAt)-new Date(a.createdAt)});if(!ideas.length)ideasList.innerHTML='<div class="empty-state"><div class="empty-state-icon">💡</div><p class="empty-state-text">Nessuna idea salvata</p><p style="font-size:.55rem;color:var(--text-muted);margin-top:4px">Seleziona testo nel Journal o Topics e clicca 💡</p></div>';else ideasList.innerHTML=ideas.map(function(i){var sourceIcon=i.sourceType==='journal'?'📓':'🎯';var hasNotes=i.notes&&i.notes.trim();return'<div class="idea-list-item'+(currentIdeaId===i.id?' active':'')+'" onclick="openIdeaPanel(\''+i.id+'\')"><div class="idea-list-item-title">'+i.title+'</div><div class="idea-list-item-meta"><div class="idea-list-item-source">'+sourceIcon+' '+i.sourceName+'</div><div>'+(hasNotes?'📝 ':'')+formatDateFull(i.createdAt)+'</div></div></div>'}).join('');var teamObjs=data.teamObjectives.filter(function(o){return!o.personal}),personalObjs=data.teamObjectives.filter(function(o){return o.personal});if(!teamObjs.length)teamList.innerHTML='<div class="empty-state"><div class="empty-state-icon">🎯</div><p class="empty-state-text">Nessun obiettivo</p></div>';else teamList.innerHTML=teamObjs.map(function(o){var krs=o.subgoals||o.keyResults||[],done=krs.filter(function(k){return k.done}).length,total=krs.length,pct=total?Math.round(done/total*100):0;return'<div class="objective-card"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px"><div style="font-size:.85rem;font-weight:600;cursor:pointer" onclick="openTeamObjectiveModal(\''+o.id+'\')">'+o.title+'</div><button class="btn btn-xs btn-secondary" onclick="deleteObjective(\''+o.id+'\')">🗑️</button></div>'+(o.description?'<div style="font-size:.7rem;color:var(--text-secondary);margin-bottom:8px">'+renderTextWithLinks(o.description)+'</div>':'')+(total?'<div class="progress-bar"><div class="progress-fill" style="width:'+pct+'%"></div></div><div style="font-size:.6rem;color:var(--text-muted);margin:4px 0">'+done+'/'+total+' completati ('+pct+'%)</div>':'')+krs.map(function(k){return'<div class="kr-item"><div class="kr-checkbox'+(k.done?' checked':'')+'" onclick="toggleKR(\''+o.id+'\',\''+k.id+'\')"></div><div style="font-size:.7rem;flex:1;cursor:pointer;'+(k.done?'text-decoration:line-through;color:var(--text-muted)':'')+'" onclick="editKR(\''+o.id+'\',\''+k.id+'\')" title="Clicca per modificare">'+k.text+'</div></div>'}).join('')+'</div>'}).join('');if(!personalObjs.length)personalList.innerHTML='<div class="empty-state"><div class="empty-state-icon">🎯</div><p class="empty-state-text">Nessun obiettivo</p></div>';else personalList.innerHTML=personalObjs.map(function(o){var krs=o.subgoals||o.keyResults||[],done=krs.filter(function(k){return k.done}).length,total=krs.length,pct=total?Math.round(done/total*100):0;return'<div class="objective-card"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px"><div style="font-size:.85rem;font-weight:600;cursor:pointer" onclick="openTeamObjectiveModal(\''+o.id+'\')">'+o.title+'</div><button class="btn btn-xs btn-secondary" onclick="deleteObjective(\''+o.id+'\')">🗑️</button></div>'+(o.description?'<div style="font-size:.7rem;color:var(--text-secondary);margin-bottom:8px">'+renderTextWithLinks(o.description)+'</div>':'')+(total?'<div class="progress-bar"><div class="progress-fill" style="width:'+pct+'%"></div></div><div style="font-size:.6rem;color:var(--text-muted);margin:4px 0">'+done+'/'+total+' completati ('+pct+'%)</div>':'')+krs.map(function(k){return'<div class="kr-item"><div class="kr-checkbox'+(k.done?' checked':'')+'" onclick="toggleKR(\''+o.id+'\',\''+k.id+'\')"></div><div style="font-size:.7rem;flex:1;cursor:pointer;'+(k.done?'text-decoration:line-through;color:var(--text-muted)':'')+'" onclick="editKR(\''+o.id+'\',\''+k.id+'\')" title="Clicca per modificare">'+k.text+'</div></div>'}).join('')+'</div>'}).join('');var progressItems=(data.progressList||[]).slice().sort(function(a,b){return new Date(b.date)-new Date(a.date)});var progressByArea={};progressItems.forEach(function(p){var area=p.area||'Altro';if(!progressByArea[area])progressByArea[area]=[];progressByArea[area].push(p)});if(!progressItems.length)progressListEl.innerHTML='<div class="empty-state"><div class="empty-state-icon">🌱</div><p class="empty-state-text">Nessun progresso annotato</p></div>';else{var progressHtml='';Object.keys(progressByArea).sort().forEach(function(area){progressHtml+='<div class="progress-area-section"><div class="progress-area-title">'+area+' <span class="section-count">'+progressByArea[area].length+'</span></div>';progressHtml+=progressByArea[area].map(function(p){return'<div class="progress-card" onclick="openProgressModal(\''+p.id+'\')"><div class="progress-card-header"><div class="progress-card-date">'+formatDateFull(p.date)+'</div></div><div class="progress-card-content">'+renderTextWithLinks(p.content)+'</div>'+(p.context?'<div class="progress-card-context">📍 '+p.context+'</div>':'')+'</div>'}).join('');progressHtml+='</div>'});progressListEl.innerHTML=progressHtml}var milestones=data.milestones.slice().sort(function(a,b){return new Date(a.date)-new Date(b.date)});if(!milestones.length)roadmapEl.innerHTML='<div class="empty-state"><div class="empty-state-icon">🗺️</div><p class="empty-state-text">Nessuna milestone</p></div>';else roadmapEl.innerHTML=milestones.map(function(m){return'<div class="roadmap-item-section"><div class="roadmap-date">'+formatDateFull(m.date)+'</div><div style="display:flex;justify-content:space-between"><div class="roadmap-item-title" style="cursor:pointer" onclick="openMilestoneModal(\''+m.id+'\')">'+m.title+'</div><button class="btn btn-xs btn-secondary" onclick="deleteMilestone(\''+m.id+'\')">🗑️</button></div>'+(m.description?'<div style="font-size:.7rem;color:var(--text-secondary);margin-top:4px">'+renderTextWithLinks(m.description)+'</div>':'')+'</div>'}).join('');var thoughts=data.thoughts.slice().sort(function(a,b){return new Date(b.createdAt)-new Date(a.createdAt)});if(!thoughts.length)thoughtsList.innerHTML='<div class="empty-state"><div class="empty-state-icon">💭</div><p class="empty-state-text">Nessun pensiero</p></div>';else thoughtsList.innerHTML=thoughts.map(function(t){return'<div class="thought-card"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div class="thought-date">'+formatDateFull(t.createdAt)+'</div><button class="btn btn-xs btn-secondary" onclick="deleteThought(\''+t.id+'\')">🗑️</button></div><div style="font-size:.75rem;line-height:1.5;white-space:pre-wrap;cursor:pointer" onclick="openThoughtModal(\''+t.id+'\')">'+renderTextWithLinks(t.content)+'</div>'+(t.tags&&t.tags.length?'<div class="tags">'+t.tags.map(function(tag){return'<span class="tag">'+tag+'</span>'}).join('')+'</div>':'')+'</div>'}).join('');var notes=data.leadershipNotes.slice().sort(function(a,b){return new Date(b.date)-new Date(a.date)});if(!notes.length)notesList.innerHTML='<div class="empty-state"><div class="empty-state-icon">📝</div><p class="empty-state-text">Nessuna nota</p></div>';else notesList.innerHTML=notes.map(function(n){return'<div class="note-card"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div class="note-date">'+formatDateFull(n.date)+'</div><button class="btn btn-xs btn-secondary" onclick="deleteLeadershipNote(\''+n.id+'\')">🗑️</button></div><div style="font-size:.75rem;line-height:1.5;white-space:pre-wrap;cursor:pointer" onclick="openLeadershipNoteModal(\''+n.id+'\')">'+renderTextWithLinks(n.content)+'</div></div>'}).join('')}
 
         // Init
-        function renderAll(){applyVisibleSections();renderLSWStats();renderWeekTracker();renderHabitsBlocks();renderPeople();renderProjects();renderLCP();renderTopics();renderBooks();renderJournal();renderTasks();renderStrategy();renderAgendaTables();if(currentPeopleView==='staff'){renderStaffTables();renderStaffNotes()}}
+        function renderAll(){applyVisibleSections();renderLSWStats();renderWeekTracker();renderHabitsBlocks();renderPeople();renderProjects();renderLCP();renderTopics();renderBooks();renderJournal();renderTasks();renderStrategy();renderAgendaTables();renderNetworking();if(currentPeopleView==='staff'){renderStaffTables();renderStaffNotes()}}
+        
+        // ============ NETWORKING CRM ============
+        var currentContactId = null;
+        var networkingFilter = 'all';
+        var networkingSearchTerm = '';
+        
+        function openContactModal(id) {
+            document.getElementById('contact-id').value = '';
+            document.getElementById('contact-name').value = '';
+            document.getElementById('contact-type').value = 'existing';
+            document.getElementById('contact-company').value = '';
+            document.getElementById('contact-role').value = '';
+            document.getElementById('contact-email').value = '';
+            document.getElementById('contact-phone').value = '';
+            document.getElementById('contact-linkedin').value = '';
+            document.getElementById('contact-priority').value = 'medium';
+            document.getElementById('contact-status').value = 'active';
+            document.getElementById('contact-next-contact').value = '';
+            document.getElementById('contact-tags').value = '';
+            document.getElementById('contact-notes').value = '';
+            document.getElementById('contact-modal-title').textContent = 'Nuovo Contatto';
+            document.getElementById('contact-delete-btn').style.display = 'none';
+            
+            if (id) {
+                var c = (data.networking || []).find(function(x) { return x.id === id; });
+                if (c) {
+                    document.getElementById('contact-id').value = c.id;
+                    document.getElementById('contact-name').value = c.name || '';
+                    document.getElementById('contact-type').value = c.type || 'existing';
+                    document.getElementById('contact-company').value = c.company || '';
+                    document.getElementById('contact-role').value = c.role || '';
+                    document.getElementById('contact-email').value = c.email || '';
+                    document.getElementById('contact-phone').value = c.phone || '';
+                    document.getElementById('contact-linkedin').value = c.linkedin || '';
+                    document.getElementById('contact-priority').value = c.priority || 'medium';
+                    document.getElementById('contact-status').value = c.status || 'active';
+                    document.getElementById('contact-next-contact').value = c.nextContact || '';
+                    document.getElementById('contact-tags').value = (c.tags || []).join(', ');
+                    document.getElementById('contact-notes').value = c.notes || '';
+                    document.getElementById('contact-modal-title').textContent = 'Modifica Contatto';
+                    document.getElementById('contact-delete-btn').style.display = 'block';
+                }
+            }
+            openModal('contact-modal');
+        }
+        
+        function saveContact() {
+            var id = document.getElementById('contact-id').value;
+            var name = document.getElementById('contact-name').value.trim();
+            if (!name) { showToast('Nome richiesto', 'error'); return; }
+            
+            var tagsStr = document.getElementById('contact-tags').value;
+            var tags = tagsStr ? tagsStr.split(',').map(function(t) { return t.trim(); }).filter(function(t) { return t; }) : [];
+            
+            var contactData = {
+                name: name,
+                type: document.getElementById('contact-type').value,
+                company: document.getElementById('contact-company').value.trim(),
+                role: document.getElementById('contact-role').value.trim(),
+                email: document.getElementById('contact-email').value.trim(),
+                phone: document.getElementById('contact-phone').value.trim(),
+                linkedin: document.getElementById('contact-linkedin').value.trim(),
+                priority: document.getElementById('contact-priority').value,
+                status: document.getElementById('contact-status').value,
+                nextContact: document.getElementById('contact-next-contact').value,
+                tags: tags,
+                notes: document.getElementById('contact-notes').value.trim(),
+                updatedAt: new Date().toISOString()
+            };
+            
+            if (!data.networking) data.networking = [];
+            
+            if (id) {
+                var idx = data.networking.findIndex(function(c) { return c.id === id; });
+                if (idx >= 0) {
+                    contactData.id = id;
+                    contactData.interactions = data.networking[idx].interactions || [];
+                    contactData.createdAt = data.networking[idx].createdAt;
+                    data.networking[idx] = contactData;
+                }
+            } else {
+                contactData.id = generateId();
+                contactData.interactions = [];
+                contactData.createdAt = new Date().toISOString();
+                data.networking.push(contactData);
+            }
+            
+            closeModal('contact-modal');
+            renderNetworking();
+            if (currentContactId === id || !id) {
+                currentContactId = contactData.id;
+                renderContactDetail(contactData.id);
+            }
+            autoSave();
+            showToast('Contatto salvato');
+        }
+        
+        function deleteContact() {
+            if (!confirm('Eliminare questo contatto?')) return;
+            var id = document.getElementById('contact-id').value;
+            data.networking = (data.networking || []).filter(function(c) { return c.id !== id; });
+            closeModal('contact-modal');
+            currentContactId = null;
+            renderNetworking();
+            autoSave();
+            showToast('Contatto eliminato');
+        }
+        
+        function setNetworkingFilter(filter, el) {
+            networkingFilter = filter;
+            document.querySelectorAll('.networking-chip').forEach(function(c) { c.classList.remove('active'); });
+            if (el) el.classList.add('active');
+            renderNetworking();
+        }
+        
+        function filterNetworking() {
+            networkingSearchTerm = (document.getElementById('networking-search-input').value || '').toLowerCase().trim();
+            renderNetworking();
+        }
+        
+        function getFilteredContacts() {
+            var contacts = (data.networking || []).slice();
+            var today = new Date();
+            today.setHours(0,0,0,0);
+            
+            // Filter by type
+            if (networkingFilter === 'existing') {
+                contacts = contacts.filter(function(c) { return c.type === 'existing'; });
+            } else if (networkingFilter === 'potential') {
+                contacts = contacts.filter(function(c) { return c.type === 'potential'; });
+            } else if (networkingFilter === 'followup') {
+                contacts = contacts.filter(function(c) {
+                    if (!c.nextContact) return false;
+                    var nc = new Date(c.nextContact);
+                    nc.setHours(0,0,0,0);
+                    return nc <= today;
+                });
+            }
+            
+            // Search filter
+            if (networkingSearchTerm) {
+                contacts = contacts.filter(function(c) {
+                    var searchStr = (c.name + ' ' + c.company + ' ' + c.role + ' ' + (c.tags || []).join(' ')).toLowerCase();
+                    return searchStr.indexOf(networkingSearchTerm) >= 0;
+                });
+            }
+            
+            // Sort: follow-up due first, then by name
+            contacts.sort(function(a, b) {
+                var aFollowup = a.nextContact && new Date(a.nextContact) <= today;
+                var bFollowup = b.nextContact && new Date(b.nextContact) <= today;
+                if (aFollowup && !bFollowup) return -1;
+                if (!aFollowup && bFollowup) return 1;
+                return (a.name || '').localeCompare(b.name || '');
+            });
+            
+            return contacts;
+        }
+        
+        function renderNetworking() {
+            var listPanel = document.getElementById('networking-list-panel');
+            var detailPanel = document.getElementById('networking-detail-panel');
+            if (!listPanel) return;
+            
+            var contacts = getFilteredContacts();
+            var today = new Date();
+            today.setHours(0,0,0,0);
+            
+            if (!contacts.length) {
+                listPanel.innerHTML = '<div class="networking-empty-detail"><div class="empty-state-icon">🤝</div><p style="font-size:.75rem">Nessun contatto</p><p style="font-size:.6rem;color:var(--text-muted);margin-top:6px">Clicca + per aggiungere</p></div>';
+                if (!currentContactId) {
+                    detailPanel.innerHTML = '<div class="networking-empty-detail"><div class="empty-state-icon">🤝</div><p>Seleziona un contatto dalla lista</p></div>';
+                }
+                return;
+            }
+            
+            var html = contacts.map(function(c) {
+                var isActive = currentContactId === c.id;
+                var typeClass = c.type || 'existing';
+                var typeLabel = c.type === 'potential' ? 'Potenziale' : 'Esistente';
+                var needsFollowup = c.nextContact && new Date(c.nextContact) <= today;
+                var cardClass = 'contact-card ' + typeClass + (isActive ? ' active' : '') + (needsFollowup ? ' followup' : '');
+                
+                var interactionCount = (c.interactions || []).length;
+                
+                return '<div class="' + cardClass + '" onclick="openContactPanel(\'' + c.id + '\')">' +
+                    '<div class="contact-card-header">' +
+                    '<div class="contact-card-name">' + c.name + '</div>' +
+                    '<span class="contact-card-type ' + typeClass + '">' + typeLabel + '</span>' +
+                    '</div>' +
+                    (c.company ? '<div class="contact-card-company">' + c.company + (c.role ? ' • ' + c.role : '') + '</div>' : '') +
+                    '<div class="contact-card-meta">' +
+                    (interactionCount ? '<span>💬 ' + interactionCount + '</span>' : '') +
+                    (c.priority === 'high' ? '<span>🔴 Alta</span>' : '') +
+                    '</div>' +
+                    (needsFollowup ? '<div class="contact-card-followup">⏰ Da ricontattare' + (c.nextContact ? ' (' + formatDate(c.nextContact) + ')' : '') + '</div>' : '') +
+                    '</div>';
+            }).join('');
+            
+            listPanel.innerHTML = html;
+            
+            if (currentContactId) {
+                renderContactDetail(currentContactId);
+            } else if (contacts.length > 0) {
+                // Non aprire automaticamente
+                detailPanel.innerHTML = '<div class="networking-empty-detail"><div class="empty-state-icon">🤝</div><p>Seleziona un contatto dalla lista</p></div>';
+            }
+        }
+        
+        function openContactPanel(id) {
+            currentContactId = id;
+            renderNetworking();
+        }
+        
+        function renderContactDetail(id) {
+            var panel = document.getElementById('networking-detail-panel');
+            var c = (data.networking || []).find(function(x) { return x.id === id; });
+            if (!c) {
+                panel.innerHTML = '<div class="networking-empty-detail"><div class="empty-state-icon">🤝</div><p>Contatto non trovato</p></div>';
+                return;
+            }
+            
+            var initials = getInitials(c.name);
+            var typeLabel = c.type === 'potential' ? '🟡 Potenziale' : '🟢 Esistente';
+            var priorityClass = 'priority-' + (c.priority || 'medium');
+            var priorityLabel = c.priority === 'high' ? '🔴 Alta priorità' : (c.priority === 'low' ? '🟢 Bassa priorità' : '🟡 Media priorità');
+            var statusLabel = c.status === 'dormant' ? 'Dormiente' : (c.status === 'nurturing' ? 'In coltivazione' : 'Attivo');
+            
+            var today = new Date();
+            today.setHours(0,0,0,0);
+            var needsFollowup = c.nextContact && new Date(c.nextContact) <= today;
+            
+            var html = '<div class="contact-detail-header">' +
+                '<div class="contact-avatar">' + initials + '</div>' +
+                '<div class="contact-detail-info">' +
+                '<div class="contact-detail-name" onclick="openContactModal(\'' + c.id + '\')">' + c.name + '</div>' +
+                (c.company ? '<div class="contact-detail-company">' + c.company + '</div>' : '') +
+                (c.role ? '<div class="contact-detail-role">' + c.role + '</div>' : '') +
+                '</div>' +
+                '<div><button class="btn btn-sm btn-secondary" onclick="openContactModal(\'' + c.id + '\')">✏️ Modifica</button></div>' +
+                '</div>';
+            
+            // Contact Info
+            html += '<div class="contact-detail-section">' +
+                '<div class="contact-detail-section-title">📋 Informazioni</div>' +
+                '<div class="contact-info-grid">';
+            
+            if (c.email) html += '<div class="contact-info-item"><div class="contact-info-label">Email</div><div class="contact-info-value"><a href="mailto:' + c.email + '">' + c.email + '</a></div></div>';
+            if (c.phone) html += '<div class="contact-info-item"><div class="contact-info-label">Telefono</div><div class="contact-info-value"><a href="tel:' + c.phone + '">' + c.phone + '</a></div></div>';
+            if (c.linkedin) html += '<div class="contact-info-item"><div class="contact-info-label">LinkedIn</div><div class="contact-info-value"><a href="' + c.linkedin + '" target="_blank">Profilo</a></div></div>';
+            html += '<div class="contact-info-item"><div class="contact-info-label">Tipo</div><div class="contact-info-value">' + typeLabel + '</div></div>';
+            html += '</div>';
+            
+            // Status badges
+            html += '<div class="contact-status-badges">' +
+                '<span class="contact-status-badge ' + priorityClass + '">' + priorityLabel + '</span>' +
+                '<span class="contact-status-badge" style="background:var(--bg-tertiary)">' + statusLabel + '</span>' +
+                '</div>';
+            
+            // Tags
+            if (c.tags && c.tags.length) {
+                html += '<div class="contact-tags">' + c.tags.map(function(t) { return '<span class="contact-tag">' + t + '</span>'; }).join('') + '</div>';
+            }
+            html += '</div>';
+            
+            // Follow-up scheduler
+            html += '<div class="contact-detail-section">' +
+                '<div class="contact-detail-section-title">⏰ Prossimo Contatto' + (needsFollowup ? ' <span style="color:#ef4444;font-size:.55rem">DA RICONTATTARE!</span>' : '') + '</div>' +
+                '<div class="followup-scheduler">' +
+                '<input type="date" class="form-input" value="' + (c.nextContact || '') + '" onchange="updateContactNextContact(\'' + c.id + '\', this.value)">' +
+                '<button class="btn btn-xs btn-secondary" onclick="setQuickFollowup(\'' + c.id + '\', 7)">+7g</button>' +
+                '<button class="btn btn-xs btn-secondary" onclick="setQuickFollowup(\'' + c.id + '\', 14)">+14g</button>' +
+                '<button class="btn btn-xs btn-secondary" onclick="setQuickFollowup(\'' + c.id + '\', 30)">+30g</button>' +
+                '</div>' +
+                '</div>';
+            
+            // Notes
+            html += '<div class="contact-detail-section">' +
+                '<div class="contact-detail-section-title">📝 Note</div>' +
+                '<div class="contact-notes-editor" contenteditable="true" id="contact-notes-editor-' + c.id + '" data-placeholder="Aggiungi note sul contatto..." oninput="updateContactNotes(\'' + c.id + '\', this)">' + (c.notes || '') + '</div>' +
+                '</div>';
+            
+            // Interactions
+            var interactions = (c.interactions || []).slice().sort(function(a, b) { return new Date(b.date) - new Date(a.date); });
+            html += '<div class="contact-detail-section">' +
+                '<div class="contact-detail-section-title">💬 Interazioni <button class="btn btn-xs btn-primary" onclick="openInteractionModal(\'' + c.id + '\')">+ Aggiungi</button></div>';
+            
+            if (!interactions.length) {
+                html += '<div style="text-align:center;padding:16px;color:var(--text-muted);font-size:.7rem">Nessuna interazione registrata</div>';
+            } else {
+                html += interactions.map(function(i) {
+                    var typeIcons = { call: '📞', email: '📧', meeting: '🤝', linkedin: '💼', event: '🎉', other: '📝' };
+                    var typeLabels = { call: 'Chiamata', email: 'Email', meeting: 'Meeting', linkedin: 'LinkedIn', event: 'Evento', other: 'Altro' };
+                    return '<div class="interaction-card">' +
+                        '<div class="interaction-card-header">' +
+                        '<div class="interaction-card-date">' + formatDateFull(i.date) + '</div>' +
+                        '<div style="display:flex;gap:4px;align-items:center">' +
+                        '<span class="interaction-card-type">' + (typeIcons[i.type] || '📝') + ' ' + (typeLabels[i.type] || i.type) + '</span>' +
+                        '<button class="btn btn-xs btn-secondary" onclick="openInteractionModal(\'' + c.id + '\', \'' + i.id + '\')">✏️</button>' +
+                        '</div></div>' +
+                        (i.notes ? '<div class="interaction-card-notes">' + i.notes + '</div>' : '') +
+                        (i.outcome ? '<div class="interaction-card-outcome">→ ' + i.outcome + '</div>' : '') +
+                        '</div>';
+                }).join('');
+            }
+            html += '</div>';
+            
+            panel.innerHTML = html;
+        }
+        
+        function updateContactNextContact(contactId, value) {
+            var c = (data.networking || []).find(function(x) { return x.id === contactId; });
+            if (c) {
+                c.nextContact = value;
+                c.updatedAt = new Date().toISOString();
+                renderNetworking();
+                autoSave();
+            }
+        }
+        
+        function setQuickFollowup(contactId, days) {
+            var futureDate = new Date();
+            futureDate.setDate(futureDate.getDate() + days);
+            var dateStr = futureDate.toISOString().split('T')[0];
+            updateContactNextContact(contactId, dateStr);
+            showToast('Follow-up impostato a ' + formatDateFull(dateStr));
+        }
+        
+        var contactNotesDebounce = null;
+        function updateContactNotes(contactId, el) {
+            var c = (data.networking || []).find(function(x) { return x.id === contactId; });
+            if (c) {
+                c.notes = el.innerHTML;
+                c.updatedAt = new Date().toISOString();
+            }
+            if (contactNotesDebounce) clearTimeout(contactNotesDebounce);
+            contactNotesDebounce = setTimeout(function() { autoSave(); }, 1500);
+        }
+        
+        // Interaction Modal
+        function openInteractionModal(contactId, interactionId) {
+            document.getElementById('interaction-id').value = '';
+            document.getElementById('interaction-contact-id').value = contactId;
+            document.getElementById('interaction-date').value = new Date().toISOString().split('T')[0];
+            document.getElementById('interaction-type').value = 'call';
+            document.getElementById('interaction-notes').value = '';
+            document.getElementById('interaction-outcome').value = '';
+            document.getElementById('interaction-modal-title').textContent = 'Nuova Interazione';
+            document.getElementById('interaction-delete-btn').style.display = 'none';
+            
+            if (interactionId) {
+                var c = (data.networking || []).find(function(x) { return x.id === contactId; });
+                if (c && c.interactions) {
+                    var i = c.interactions.find(function(x) { return x.id === interactionId; });
+                    if (i) {
+                        document.getElementById('interaction-id').value = i.id;
+                        document.getElementById('interaction-date').value = i.date || '';
+                        document.getElementById('interaction-type').value = i.type || 'other';
+                        document.getElementById('interaction-notes').value = i.notes || '';
+                        document.getElementById('interaction-outcome').value = i.outcome || '';
+                        document.getElementById('interaction-modal-title').textContent = 'Modifica Interazione';
+                        document.getElementById('interaction-delete-btn').style.display = 'block';
+                    }
+                }
+            }
+            openModal('interaction-modal');
+        }
+        
+        function saveInteraction() {
+            var contactId = document.getElementById('interaction-contact-id').value;
+            var interactionId = document.getElementById('interaction-id').value;
+            
+            var c = (data.networking || []).find(function(x) { return x.id === contactId; });
+            if (!c) { showToast('Contatto non trovato', 'error'); return; }
+            
+            if (!c.interactions) c.interactions = [];
+            
+            var interactionData = {
+                date: document.getElementById('interaction-date').value,
+                type: document.getElementById('interaction-type').value,
+                notes: document.getElementById('interaction-notes').value.trim(),
+                outcome: document.getElementById('interaction-outcome').value.trim(),
+                updatedAt: new Date().toISOString()
+            };
+            
+            if (interactionId) {
+                var idx = c.interactions.findIndex(function(i) { return i.id === interactionId; });
+                if (idx >= 0) {
+                    interactionData.id = interactionId;
+                    interactionData.createdAt = c.interactions[idx].createdAt;
+                    c.interactions[idx] = interactionData;
+                }
+            } else {
+                interactionData.id = generateId();
+                interactionData.createdAt = new Date().toISOString();
+                c.interactions.push(interactionData);
+            }
+            
+            c.updatedAt = new Date().toISOString();
+            closeModal('interaction-modal');
+            renderContactDetail(contactId);
+            autoSave();
+            showToast('Interazione salvata');
+        }
+        
+        function deleteInteraction() {
+            if (!confirm('Eliminare questa interazione?')) return;
+            var contactId = document.getElementById('interaction-contact-id').value;
+            var interactionId = document.getElementById('interaction-id').value;
+            
+            var c = (data.networking || []).find(function(x) { return x.id === contactId; });
+            if (c && c.interactions) {
+                c.interactions = c.interactions.filter(function(i) { return i.id !== interactionId; });
+                c.updatedAt = new Date().toISOString();
+            }
+            
+            closeModal('interaction-modal');
+            renderContactDetail(contactId);
+            autoSave();
+            showToast('Interazione eliminata');
+        }
         
         // ============ AGENDA TABLES ============
         function openAgendaTableModal(id){
